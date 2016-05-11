@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/aneylon/study-it/issues"
   },
-  "homepage": "https://github.com/aneylon/study-it#readme"
+  "homepage": "https://github.com/aneylon/study-it#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }

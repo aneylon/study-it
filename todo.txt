@@ -1,0 +1,41 @@
+add dotenv
+configure heroku
+
+layout
+style
+local data
+
+	question
+	answer
+	explanation
+
+users
+	username
+	name
+	contact - email
+	password
+	is admin
+
+flesh out views
+// sections
+	// learn
+	// review
+	// test
+
+	// multiple choice
+	// flash cards
+	// lessons
+
+// extras
+	// chat
+	// forums
+
+// db info
+To connect using the mongo shell:
+mongo ds019482.mlab.com:19482/study-it -u <dbuser> -p <dbpassword>
+
+To connect using a driver via the standard MongoDB URI (what's this?):
+  mongodb://<dbuser>:<dbpassword>@ds019482.mlab.com:19482/study-it
+
+U: aneylon
+P: standard

@@ -3,7 +3,7 @@ require('dotenv').config();
 var express = require('express');
 var app = express();
 
-var port = process.env.port || 8888;
+var port = process.env.PORT || 8888;
 
 app.use(express.static('public'));
 

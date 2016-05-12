@@ -34,3 +34,4 @@ node_modules
 
 # bower components
 public/components
+.env

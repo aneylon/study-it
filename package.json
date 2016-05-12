@@ -6,7 +6,8 @@
   "scripts": {
     "setup": "echo \"test\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/aneylon/study-it#readme",
   "dependencies": {
+    "bower": "^1.7.9",
     "dotenv": "^2.0.0",
     "express": "^4.13.4"
   }

@@ -1,11 +1,10 @@
 {
   "name": "study-it",
   "version": "0.0.1",
-  "description": "",
+  "description": "get your study on",
   "main": "server.js",
   "scripts": {
-    "setup": "echo \"test\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js",
     "postinstall": "bower install"
   },
@@ -14,7 +13,7 @@
     "url": "git+https://github.com/aneylon/study-it.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Arlen Neylon",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/aneylon/study-it/issues"
@@ -23,6 +22,11 @@
   "dependencies": {
     "bower": "^1.7.9",
     "dotenv": "^2.0.0",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mocha": "^2.4.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }

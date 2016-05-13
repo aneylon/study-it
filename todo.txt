@@ -1,8 +1,15 @@
 x add dotenv
 x configure heroku
 
-set up travis
-set up tests
+x set up travis
+x set up tests
+x set up nodemon
+
+add animate
+add charts
+
+do real tests
+gulp / grunt ?
 
 layout
 style
@@ -11,6 +18,9 @@ local data
 	question
 	answer
 	explanation
+
+
+authentication
 
 users
 	username

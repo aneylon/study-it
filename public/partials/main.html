@@ -1,3 +1,19 @@
 <div>
-	{{test}}
+	<p>
+		{{test}}
+	</p>
+	<ul>
+		<li ng-repeat="section in sections">
+			{{section.name}}
+			<ul>
+				<li ng-repeat="subsection in section.subsections">
+					{{subsection.name}}
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<div id="">
+		Selected content goes here
+	</div>
 </div>

@@ -5,15 +5,26 @@
 		<link href="css/style.css" rel="stylesheet"/>
 		<script src="components/angular/angular.min.js"></script>
 		<script src="components/angular-route/angular-route.min.js"></script>
+		<script src="components/angular-animate/angular-animate.min.js"></script>
+		<script src="components/Chart.js/Chart.js"></script>
+		<script src="components/angular-chart.js/dist/angular-chart.min.js"></script>
 		<script src="js/app.js"></script>
 	</head>
 	<body ng-app="study-it">
+		<header>
+			<li><a href="#main">main</a></li>
+			<li><a href="#login">login/out</a></li>
+			<li><a href="#signup">signup</a></li>
+			<li><a href="#admin">admin</a></li>
+			<li><a href="#user">user</a></li>
+		</header>
 		test
 		<ul>
-			<li><a href="#main">main</a></li>
-			<li><a href="#about">about</a></li>
-			<li><a href="#contact">contact</a></li>
 		</ul>
 		<div ng-view></div>
+		<footer>
+			<li><a href="#about">about</a></li>
+			<li><a href="#contact">contact</a></li>
+		</footer>
 	</body>
 </html>

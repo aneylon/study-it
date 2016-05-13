@@ -1,5 +1,8 @@
-add dotenv
-configure heroku
+x add dotenv
+x configure heroku
+
+set up travis
+set up tests
 
 layout
 style
@@ -17,6 +20,11 @@ users
 	is admin
 
 flesh out views
+
+	user info
+	about
+	contact
+
 // sections
 	// learn
 	// review

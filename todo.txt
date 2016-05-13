@@ -5,6 +5,9 @@ x set up travis
 x set up tests
 x set up nodemon
 
+add animate
+add charts
+
 do real tests
 gulp / grunt ?
 

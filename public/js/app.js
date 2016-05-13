@@ -1,6 +1,6 @@
 // console.log("test");
 angular
-	.module("study-it",["ngRoute"])
+	.module("study-it",["ngRoute","ngAnimate","chart.js"])
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/',{
@@ -22,6 +22,14 @@ angular
 			.when('/signup',{
 				templateUrl: 'partials/signup.html',
 				controller: 'signupCtrl'
+			})
+			.when('/admin',{
+				templateUrl: 'partials/admin.html',
+				controller: 'adminCtrl'
+			})
+			.when('/user',{
+				templateUrl: 'partials/user.html',
+				controller: 'userCtrl'
 			})
 			.otherwise({
 				redirectTo: '/'
@@ -65,4 +73,25 @@ angular
 		$scope.signup = function(){
 			console.log("signing up");
 		}
+	})
+	.controller("adminCtrl",function($scope){
+		var test = "hello admin";
+		$scope.test = test;
+		$scope.add = function(){
+			console.log("adding new stuff");
+		}
+	})
+	.controller("userCtrl",function($scope){
+		var test = "hello user";
+		$scope.test = test;
+
+		$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+		$scope.series = ['Series A', 'Series B'];
+		$scope.data = [
+		  [65, 59, 80, 81, 56, 55, 40],
+		  [28, 48, 40, 19, 86, 27, 90]
+		];
+		$scope.onClick = function (points, evt) {
+		  console.log(points, evt);
+		};
 	})

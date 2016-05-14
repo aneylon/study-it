@@ -5,8 +5,8 @@ x set up travis
 x set up tests
 x set up nodemon
 
-add animate
-add charts
+x add animate
+x add charts
 
 do real tests
 gulp / grunt ?

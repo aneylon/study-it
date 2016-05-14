@@ -1,0 +1,11 @@
+.slide {
+  transition: ease-in 0.15s;
+  color: black;
+  height: 3em;
+}
+
+.ng-hide {
+  height: 0;
+  background-color: transparent;
+  color: transparent;
+}

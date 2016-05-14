@@ -2,6 +2,10 @@
 
 # study-it
 
+[Main site](https://study-it.herokuapp.com)
+
+[Test site](https://study-it-test.herokuapp.com)
+
 ## setup
 ```
 npm run setup

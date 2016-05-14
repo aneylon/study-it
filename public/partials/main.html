@@ -6,14 +6,18 @@
 		<li ng-repeat="section in sections">
 			{{section.name}}
 			<ul>
-				<li ng-repeat="subsection in section.subsections">
+				<li ng-repeat="subsection in section.subsections" ng-click="load(section.name + '.' + subsection.name)">
 					{{subsection.name}}
 				</li>
 			</ul>
 		</li>
 	</ul>
-
-	<div id="">
-		Selected content goes here
+	<div id="card">
+		<div id="question" ng-click="showCard()" class="pointer">question</div>
+		<div ng-show="checked">
+			<div id="answer">answer</div>
+			<div id="explain">explain</div>
+		</div>
 	</div>
+	<input type="button" value="next" ng-click="nextCard()">
 </div>

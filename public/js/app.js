@@ -42,7 +42,26 @@ angular
 			{
 				name:"日本語",
 				subsections: [
-					{name:"Lv3"},
+					{
+						name:"Lv3",
+						content: [
+							{
+								question: "abc?",
+								answer: "def",
+								explain: "ghi"
+							},
+							{
+								question: "123?",
+								answer: "456",
+								explain: "789"
+							},
+							{
+								question: "!@#?",
+								answer: "$%^",
+								explain: "&*("
+							},
+						]
+					},
 					{name:"Lv2"}
 				]},
 			{name:"中文"},
@@ -50,7 +69,17 @@ angular
 			{name:"한국어"},
 			{name:"A+"},
 			{name:"JavaScript"}
-		]
+		];
+		$scope.load = function(cards){
+			console.log("loading ", cards);
+		}
+		$scope.checked = false;
+		$scope.showCard = function(){
+			$scope.checked = !$scope.checked;
+		}
+		$scope.nextCard = function(){
+			console.log("next card");
+		}
 	})
 	.controller("aboutCtrl",function($scope){
 		var test = "hello about";
@@ -63,22 +92,40 @@ angular
 	.controller("loginCtrl",function($scope){
 		var test = "hello login";
 		$scope.test = test;
+		$scope.notValidated = true;
+		$scope.validate = function(){ $scope.notValidated = !$scope.notValidated; };
 		$scope.login = function(){
-			console.log("loging in");
+			var creds = {
+				username: $scope.username,
+				password: $scope.password
+			}
+			console.log("loging in", creds);
 		}
 	})
 	.controller("signupCtrl",function($scope){
 		var test = "hello signup";
 		$scope.test = test;
+		$scope.notValidated = true;
 		$scope.signup = function(){
-			console.log("signing up");
+			var newUser = {
+				username: $scope.username,
+				email: $scope.email,
+				password: $scope.password
+			}
+			console.log("signing up", newUser);
 		}
 	})
 	.controller("adminCtrl",function($scope){
 		var test = "hello admin";
 		$scope.test = test;
+		$scope.notValidated = true;
 		$scope.add = function(){
-			console.log("adding new stuff");
+			var newCard = {
+				question: $scope.question,
+				answer: $scope.answer,
+				explain: $scope.explain
+			}
+			console.log("adding new stuff", newCard);
 		}
 	})
 	.controller("userCtrl",function($scope){

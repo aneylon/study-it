@@ -1,13 +1,11 @@
 <div>
 	{{test}}
 	<br>
-	<input type="text" placeholder="one">
+	<input type="text" placeholder="question" ng-model="question">
 	<br>
-	<input type="text" placeholder="two">
+	<input type="text" placeholder="answer" ng-model="answer">
 	<br>
-	<input type="text" placeholder="three">
+	<input type="text" placeholder="explain" ng-model="explain">
 	<br>
-	<input type="text" placeholder="four">
-	<br>
-	<input type="button" value="add" ng-click="add()">
+	<input type="button" value="add" ng-click="add()" ng-disabled="notValidated">
 </div>

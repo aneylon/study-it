@@ -1,4 +1,3 @@
-// console.log("test");
 angular
 	.module("study-it",["ngRoute","ngAnimate","chart.js"])
 	.config(function($routeProvider){
@@ -73,9 +72,9 @@ angular
 		$scope.load = function(cards){
 			console.log("loading ", cards);
 		}
-		$scope.checked = false;
+		$scope.showingCard = false;
 		$scope.showCard = function(){
-			$scope.checked = !$scope.checked;
+			$scope.showingCard = !$scope.showingCard;
 		}
 		$scope.nextCard = function(){
 			console.log("next card");

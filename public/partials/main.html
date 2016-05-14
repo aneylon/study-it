@@ -2,6 +2,7 @@
 	<p>
 		{{test}}
 	</p>
+	
 	<ul>
 		<li ng-repeat="section in sections">
 			{{section.name}}
@@ -12,12 +13,15 @@
 			</ul>
 		</li>
 	</ul>
+
 	<div id="card">
 		<div id="question" ng-click="showCard()" class="pointer">question</div>
-		<div ng-show="checked">
+		<div class="slide" ng-show="showingCard">
 			<div id="answer">answer</div>
 			<div id="explain">explain</div>
 		</div>
 	</div>
+
 	<input type="button" value="next" ng-click="nextCard()">
+
 </div>

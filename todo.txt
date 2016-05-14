@@ -1,3 +1,7 @@
+better animation on cards
+Validation
+	http://www.w3schools.com/angular/angular_validation.asp
+
 x add dotenv
 x configure heroku
 
@@ -18,7 +22,6 @@ local data
 	question
 	answer
 	explanation
-
 
 authentication
 

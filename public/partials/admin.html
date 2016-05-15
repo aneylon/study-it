@@ -1,11 +1,16 @@
 <div>
 	{{test}}
 	<br>
-	<input type="text" placeholder="question" ng-model="question">
-	<br>
-	<input type="text" placeholder="answer" ng-model="answer">
-	<br>
-	<input type="text" placeholder="explain" ng-model="explain">
-	<br>
-	<input type="button" value="add" ng-click="add()" ng-disabled="notValidated">
+  <form name="addQuestion">
+  	<input type="text" name="question" placeholder="question" ng-model="question" required>
+    <span class="redText" ng-show="addQuestion.question.$invalid && addQuestion.question.$dirty">Required</span>
+  	<br>
+  	<input type="text" name="answer" placeholder="answer" ng-model="answer" required>
+    <span class="redText" ng-show="addQuestion.answer.$invalid && addQuestion.answer.$dirty">Required</span>
+  	<br>
+  	<input type="text" name="explain" placeholder="explain" ng-model="explain" required>
+    <span class="redText" ng-show="addQuestion.explain.$invalid && addQuestion.explain.$dirty">Required</span>
+  	<br>
+  	<input type="button" value="add" ng-click="add()" ng-disabled="addQuestion.$invalid">
+  </form>
 </div>

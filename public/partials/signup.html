@@ -1,13 +1,19 @@
 <div>
 	{{test}}
 	<br>
-	<input type="text" placeholder="username" ng-model="username">
-	<br>
-	<input type="text" placeholder="email" ng-model="email">
-	<br>
-	<input type="password" placeholder="password" ng-model="password">
-	<br>
-	<input type="password" placeholder="confirm">
-	<br>
-	<input type="button" value="signup" ng-click="signup()" ng-disabled="notValidated">
+	<form name="userSignup">
+		<input type="text" name="username" placeholder="username" ng-model="username" required>
+		<span class="redText" ng-show="userSignup.username.$invalid && userSignup.username.$dirty">Required</span>
+		<br>
+		<input type="text" name="email" placeholder="email" ng-model="email" required>
+		<span class="redText" ng-show="userSignup.email.$invalid && userSignup.email.$dirty">Required</span>
+		<br>
+		<input type="password" name="passwordOne" placeholder="password" ng-model="password" required>
+		<span class="redText" ng-show="userSignup.passwordOne.$invalid && userSignup.passwordOne.$dirty">Required</span>
+		<br>
+		<input type="password" name="passwordTwo" placeholder="confirm" ng-model="passwordTwo" required>
+		<span class="redText" ng-show="userSignup.passwordTwo.$invalid && userSignup.passwordTwo.$dirty">Required</span>
+		<br>
+		<input type="button" value="signup" ng-click="signup()" ng-disabled="userSignup.$invalid">
+	</form>
 </div>

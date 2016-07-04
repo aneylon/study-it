@@ -45,6 +45,17 @@ app.post('/api/postIt', function(req, res){
 	res.send('posted it' + JSON.stringify(req.body));
 });
 
+app.post('/api/loadLib', function(req, res){
+	// make post request with name of lib to load {name : 'libName'}
+	var libName = req.body.name;
+	console.log('looking for', libName);
+	// get ref to DB?
+	// libName.find({}, function(err, results){
+	// 	res.json(results);
+	// })
+	res.send('looking for ' + libName);
+})
+
 app.listen(port, function(){
 	console.log('listening on : ',port);
 });

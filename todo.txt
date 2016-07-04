@@ -1,3 +1,16 @@
+Post route to load collections
+Post to add vocab.
+  Check if existing
+  
+Add user
+  Check if existing
+Login user
+Keep jwt to stay logged in
+Logout
+
+Save user data
+Show user data
+
 better animation on cards
 Validation
 	http://www.w3schools.com/angular/angular_validation.asp

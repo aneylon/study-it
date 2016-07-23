@@ -123,9 +123,14 @@ angular
 				question: $scope.question,
 				answer: $scope.answer,
 				explain: $scope.explain
-			}
+			};
 			console.log("adding new stuff", newCard);
-		}
+
+			$http.post('/api/post', newCard)
+				.then(function(res){
+					console.log(res);
+				});
+		};
 	})
 	.controller("userCtrl",function($scope){
 		var test = "hello user";

@@ -18,7 +18,7 @@ describe("Mocha and Chai Tests", function(){
 	})
 })
 
-describe("Routes", function(){
+xdescribe("Routes", function(){
 	it("Get It", function(){
 		expect(routes.getIt).to.be.a('function');
 		expect(routes.getIt()).to.equal("GET IT");

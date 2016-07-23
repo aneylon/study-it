@@ -1,7 +1,10 @@
+Timer / schedule
+Mail gun?
+
 Post route to load collections
 Post to add vocab.
   Check if existing
-  
+
 Add user
   Check if existing
 Login user

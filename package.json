@@ -25,6 +25,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.0.1",
+    "mailgun-js": "^0.7.11",
     "mocha": "^2.4.5",
     "mongoose": "^4.5.3",
     "morgan": "^1.7.0",

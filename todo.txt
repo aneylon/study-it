@@ -1,5 +1,6 @@
-Timer / schedule
-Mail gun?
+x Timer / schedule
+ - Mail gun?
+
 
 Post route to load collections
 Post to add vocab.

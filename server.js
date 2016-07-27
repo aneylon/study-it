@@ -10,7 +10,7 @@ var routes = require('./routes');
 var User = require('./models/user');
 var Card = require('./models/card');
 
-// var scheduledTasks = require('./utils/schedule.js');
+var scheduledTasks = require('./utils/schedule.js');
 
 var port = process.env.PORT || 8888;
 // mongoose.connect(process.env.DB_HOST);

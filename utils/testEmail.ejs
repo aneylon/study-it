@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <!-- <link rel="stylesheet" href="mailStyle.css"> -->
+  <style>
+    * {
+      border: solid green 1px;
+    }
+  </style>
 </head>
 <body>
   <p><%= one %></p>
   <ul>
-  <% for(var i=0; i<two; i++) {%>
+  <% for(var i=0; i<two.length; i++) {%>
     <li><%= two[i] %></li>
   <% } %>
   </ul>

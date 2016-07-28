@@ -1,7 +1,7 @@
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
 // rule.second = 01;
-rule.minute = 01;
+// rule.minute = 01;
 // rule.hour = 01;
 
 // add ejs or other template
@@ -11,7 +11,7 @@ function readFile(file){
   var filepath = __dirname + '/' + file;
   return fs.readFileSync(filepath, 'utf8');
 }
-var template = readFile('./testEmail.ejs')
+var template = readFile('./testEmail.ejs');
 var body = ejs.render(template, {
   one: 'this is the first thing',
   two: [1,'a',true]

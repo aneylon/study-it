@@ -30,7 +30,8 @@
     "mocha": "^2.4.5",
     "mongoose": "^4.5.3",
     "morgan": "^1.7.0",
-    "node-schedule": "^1.1.1"
+    "node-schedule": "^1.1.1",
+    "supertest": "^1.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

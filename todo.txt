@@ -1,6 +1,9 @@
 x Timer / schedule
- - Mail gun?
+ x Mail gun?
+ x ejs templating
 
+Load and randomize cards
+ - save user response
 
 Post route to load collections
 Post to add vocab.

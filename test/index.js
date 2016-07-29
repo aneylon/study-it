@@ -4,6 +4,14 @@ var assert = require('chai').assert;
 // var server = require('../server.js');
 var routes = require('../routes');
 
+var request = require('supertest');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(routes);
+
 describe("Mocha and Chai Tests", function(){
 	it("Expect", function(){
 		expect(42).to.be.a("number");
@@ -19,22 +27,46 @@ describe("Mocha and Chai Tests", function(){
 })
 
 xdescribe("Routes", function(){
-	it("Get It", function(){
-		expect(routes.getIt).to.be.a('function');
-		expect(routes.getIt()).to.equal("GET IT");
-		expect(routes.getIt()).to.be.a('string');
+	it("Get /api/getIt", function(done){
+		request(app)
+			.get('/api/getIt')
+			.end(function(err,res){
+				if(err){
+					console.log(err);
+					return done(err);
+				}
+				(res.body).should.be.an.instanceOf(String);
+				(res.body).should.equal('got it');
+				done();
+			});
 	})
 
-	it("Post It", function(){
-		assert.equal(routes.postIt(),"Posted");
-		routes.postIt().should.equal("Posted");
-		routes.postIt.should.be.a("function");
-		routes.postIt().should.be.a("string");
-	})
+	it("Post to /api/postIt", function(done){
+		request(app)
+			.post('/api/postIt')
+			.send({test: 'test'})
+			.end(function(err,res){
+				if(err){
+					console.log(err);
+					return done(err);
+				}
+				(res.body).should.be.an.instanceOf(String);
+				(res.body).should.be.equal('posted it');
+				done();
+			});
+	});
 
-	it("Some Thing", function(){
-		assert.equal(routes.someThing(),"Nothing");
-		assert.typeOf(routes.someThing,"function");
-		assert.typeOf(routes.someThing(),"string");
+	xit("Post to get a library", function(){
+
+		// router.post('/api/loadLib', function(req, res){
+		//   // make post request with name of lib to load {name : 'libName'}
+		//   var libName = req.body.name;
+		//   console.log('looking for', libName);
+		//   // get ref to DB?
+		//   // libName.find({}, function(err, results){
+		//   //  res.json(results);
+		//   // })
+		//   res.send('looking for ' + libName);
+		// });
 	})
 })

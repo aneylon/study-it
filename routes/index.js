@@ -15,13 +15,13 @@ router.get('/api/setup', function(req, res){
 });
 
 router.get('/api/getIt', function(req, res){
-  console.log('got it');
+  // console.log('got it');
   res.send('got it');
 });
 
 router.post('/api/postIt', function(req, res){
-  console.log(req.body);
-  console.log('posted it');
+  // console.log(req.body);
+  // console.log('posted it');
   res.send('posted it' + JSON.stringify(req.body));
 });
 

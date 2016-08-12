@@ -41,31 +41,33 @@ angular
 			{
 				name:"日本語",
 				subsections: [
-					{
-						name:"Lv3",
-						content: [
-							{
-								question: "abc?",
-								answer: "def",
-								explain: "ghi"
-							},
-							{
-								question: "123?",
-								answer: "456",
-								explain: "789"
-							},
-							{
-								question: "!@#?",
-								answer: "$%^",
-								explain: "&*("
-							},
-						]
-					},
-					{name:"Lv2"}
+					{name:"Lv5"},
+					{name:"Lv4"},
+					{name:"Lv3"},
+					{name:"Lv2"},
+					{name:"Lv1"}
 				]},
-			{name:"中文"},
-			{name:"日本語"},
-			{name:"한국어"},
+			{
+				name:"中文",
+				subsections: [
+					{name:"hsk1"},
+					{name:"hsk2"},
+					{name:"hsk3"},
+					{name:"hsk4"},
+					{name:"hsk5"}
+				]
+			},
+			{
+				name:"한국어",
+				subsections:[
+					{name:"topik I 1"},
+					{name:"topik I 2"},
+					{name:"topik II 3"},
+					{name:"topik II 4"},
+					{name:"topik II 5"},
+					{name:"topik II 6"}
+				]
+			},
 			{name:"A+"},
 			{name:"JavaScript"}
 		];

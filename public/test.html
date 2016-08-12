@@ -8,9 +8,21 @@
 </head>
 <body>
   <div ng-controller="testCtrl">
-    <div ng-click="load(one)">Load One</div>
-    <div ng-click="load(two)">Load Two</div>
-    {{test}}
+    <div ng-click="load(cardsOne)">Load One</div>
+    <div ng-click="load(cardsTwo)">Load Two</div>
+    <div id="card">
+      <div id="question" ng-click="toggleHide()">
+        {{card.question}}
+      </div>
+      <div ng-hide="hidingCard">
+        <div id="answer">
+          {{card.answer}}
+        </div>
+        <div id="explain">
+          {{card.explain}}
+        </div>
+      </div>
+    </div>
     <div ng-click="next()">next</div>
     <div ng-click="prev()">prev</div>
   </div>

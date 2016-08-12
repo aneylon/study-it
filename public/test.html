@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tests">
+<head>
+  <meta charset="UTF-8">
+  <title>Study IT tests</title>
+  <script src="components/angular/angular.js"></script>
+  <script src="js/tests.js"></script>
+</head>
+<body>
+  <div ng-controller="testCtrl">
+    <div ng-click="load(one)">Load One</div>
+    <div ng-click="load(two)">Load Two</div>
+    {{test}}
+    <div ng-click="next()">next</div>
+    <div ng-click="prev()">prev</div>
+  </div>
+</body>
+</html>

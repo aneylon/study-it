@@ -1,7 +1,7 @@
 console.log('this is a test');
 angular
   .module('tests',[])
-  .controller('testCtrl',function($scope){
+  .controller('testCtrl',function($scope, $http){
     $scope.card = '';
     $scope.currentLib = '';
     $scope.currentCard = 0;
@@ -27,9 +27,14 @@ angular
     }
     $scope.load = function(lib){
       console.log('loading ', lib);
-      shuffle(lib);
-      $scope.currentLib = lib;
-      $scope.showCurrentCard();
+      // shuffle(lib);
+      // $scope.currentLib = lib;
+      $http.get('/api/libs/' + lib)
+				.then(function(res){
+					console.log('res was ', res);
+				});
+
+      // $scope.showCurrentCard();
     }
     $scope.cardsOne = [
       {question:'one',answer:'two',explain:'three'},

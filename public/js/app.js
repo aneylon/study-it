@@ -34,7 +34,7 @@ angular
 				redirectTo: '/'
 			})
 	})
-	.controller("mainCtrl",function($scope){
+	.controller("mainCtrl",function($scope, $http){
 		var test = "hello main";
 		$scope.test = test;
 		$scope.sections = [
@@ -42,30 +42,20 @@ angular
 				name:"日本語",
 				subsections: [
 					{name:"Lv5"},
-					{name:"Lv4"},
-					{name:"Lv3"},
-					{name:"Lv2"},
-					{name:"Lv1"}
+					{name:"Lv4"}
 				]},
 			{
 				name:"中文",
 				subsections: [
 					{name:"hsk1"},
-					{name:"hsk2"},
-					{name:"hsk3"},
-					{name:"hsk4"},
-					{name:"hsk5"}
+					{name:"hsk2"}
 				]
 			},
 			{
 				name:"한국어",
 				subsections:[
 					{name:"topik I 1"},
-					{name:"topik I 2"},
-					{name:"topik II 3"},
-					{name:"topik II 4"},
-					{name:"topik II 5"},
-					{name:"topik II 6"}
+					{name:"topik I 2"}
 				]
 			},
 			{name:"A+"},
@@ -73,6 +63,10 @@ angular
 		];
 		$scope.load = function(cards){
 			console.log("loading ", cards);
+		$http.get('/api/libs/' + cards)
+			.then(function(res){
+				console.log('res data is :', res.data);
+			});
 		}
 		$scope.showingCard = false;
 		$scope.showCard = function(){
@@ -90,7 +84,7 @@ angular
 		var test = "hello contact";
 		$scope.test = test;
 	})
-	.controller("loginCtrl",function($scope){
+	.controller("loginCtrl",function($scope, $http){
 		var test = "hello login";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -101,9 +95,13 @@ angular
 				password: $scope.password
 			}
 			console.log("loging in", creds);
+		$http.post('/api/signIn', creds)
+			.then(function(res){
+				console.log(res);
+			});
 		}
 	})
-	.controller("signupCtrl",function($scope){
+	.controller("signupCtrl",function($scope, $http){
 		var test = "hello signup";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -114,9 +112,13 @@ angular
 				password: $scope.password
 			}
 			console.log("signing up", newUser);
-		}
+		$http.post('/api/signUp', newUser)
+			.then(function(res){
+				console.log(res);
+			});
+		};
 	})
-	.controller("adminCtrl",function($scope){
+	.controller("adminCtrl",function($scope, $http){
 		var test = "hello admin";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -128,10 +130,10 @@ angular
 			};
 			console.log("adding new stuff", newCard);
 
-			$http.post('/api/post', newCard)
-				.then(function(res){
-					console.log(res);
-				});
+		$http.post('/api/postIt', newCard)
+			.then(function(res){
+				console.log(res);
+			});
 		};
 	})
 	.controller("userCtrl",function($scope){
@@ -143,8 +145,6 @@ angular
 		$scope.data = [
 			[randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
 			[randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)]
-		  // [65, 59, 80, 81, 56, 55, 40],
-		  // [28, 48, 40, 19, 86, 27, 90]
 		];
 		$scope.onClick = function (points, evt) {
 		  console.log(points, evt);

@@ -11,7 +11,6 @@ angular
     }
     $scope.next = function(){
       console.log('next');
-      // add one, if greater than total, reshuffle and start from beginning.
       $scope.currentCard++;
       if($scope.currentCard > $scope.currentLib.length - 1){
         $scope.currentCard = 0;
@@ -26,15 +25,10 @@ angular
       console.log('prev');
     }
     $scope.load = function(lib){
-      console.log('loading ', lib);
-      // shuffle(lib);
-      // $scope.currentLib = lib;
       $http.get('/api/libs/' + lib)
 				.then(function(res){
-					console.log('res was ', res);
+					console.log('res data is :', res.data);
 				});
-
-      // $scope.showCurrentCard();
     }
     $scope.cardsOne = [
       {question:'one',answer:'two',explain:'three'},

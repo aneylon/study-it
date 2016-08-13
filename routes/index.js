@@ -24,8 +24,21 @@ router.get('/api/libs/:libName', function(req, res){
   res.send('loaded'+ libName);
 });
 
+router.post('/api/signUp', function(req, res){
+  // check if user exists
+  //   if exists send error
+  //   else add user and send confirmation
+  console.log(req.body);
+  res.send('signed up ' + JSON.stringify(req.body));
+});
+
+router.post('/api/signIn', function(req, res){
+  console.log(req.body);
+  res.send('signing in ' + JSON.stringify(req.body));
+})
+
 router.post('/api/postIt', function(req, res){
-  // console.log(req.body);
+  console.log(req.body);
   // console.log('posted it');
   res.send('posted it' + JSON.stringify(req.body));
 });
@@ -42,23 +55,3 @@ router.post('/api/loadLib', function(req, res){
 });
 
 module.exports = router;
-
-/*
-var getIt = function(){
-	return "GET IT";
-}
-
-var postIt = function(){
-	return "Posted";
-}
-
-var someThing = function(){
-	return "Nothing";
-}
-
-module.exports = {
-	getIt: getIt,
-	postIt: postIt,
-	someThing: someThing
-};
-*/

@@ -19,6 +19,11 @@ router.get('/api/getIt', function(req, res){
   res.send('got it');
 });
 
+router.get('/api/libs/:libName', function(req, res){
+  var libName = req.params.libName;
+  res.send('loaded'+ libName);
+});
+
 router.post('/api/postIt', function(req, res){
   // console.log(req.body);
   // console.log('posted it');

@@ -8,8 +8,8 @@
 </head>
 <body>
   <div ng-controller="testCtrl">
-    <div ng-click="load(cardsOne)">Load One</div>
-    <div ng-click="load(cardsTwo)">Load Two</div>
+    <div ng-click="load('cardsOne')">Load One</div>
+    <div ng-click="load('cardsTwo')">Load Two</div>
     <div id="card">
       <div id="question" ng-click="toggleHide()">
         {{card.question}}

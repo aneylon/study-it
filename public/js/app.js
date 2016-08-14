@@ -62,7 +62,6 @@ angular
 			{name:"JavaScript"}
 		];
 		$scope.load = function(lib){
-			// console.log("loading ", lib);
 			$scope.currentLib = cards;
 			shuffle($scope.currentLib);
 			$scope.showCurrentCard();

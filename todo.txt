@@ -1,6 +1,14 @@
-x Timer / schedule
- x Mail gun?
- x ejs templating
+Authentication
+  Middleware
+  JWT
+  logout
+  cookies?
+
+Add user
+  Check if existing
+Login user
+Keep jwt to stay logged in
+Logout
 
 Load and randomize cards
  - save user response
@@ -9,18 +17,16 @@ Post route to load collections
 Post to add vocab.
   Check if existing
 
-Add user
-  Check if existing
-Login user
-Keep jwt to stay logged in
-Logout
-
 Save user data
 Show user data
 
 better animation on cards
-Validation
-	http://www.w3schools.com/angular/angular_validation.asp
+
+x Timer / schedule
+ x Mail gun?
+ x ejs templating
+ 
+xValidation
 
 x add dotenv
 x configure heroku

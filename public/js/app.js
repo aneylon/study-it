@@ -34,7 +34,7 @@ angular
 				redirectTo: '/'
 			})
 	})
-	.controller("mainCtrl",function($scope, $http){
+	.controller("mainCtrl",function($scope, $http, $timeout){
 		var test = "hello main";
 		$scope.test = test;
 		$scope.sections = [
@@ -72,9 +72,12 @@ angular
 				});
 		};
 		$scope.showingCard = false;
-		$scope.showCard = function(){
+		$scope.toggleShowCard = function(){
 			$scope.showingCard = !$scope.showingCard;
 		};
+		$scope.hideCard = function(){
+			$scope.showingCard = false;
+		}
 		$scope.showCurrentCard = function(){
 			$scope.card = $scope.currentLib[$scope.currentCard];
 		};
@@ -82,12 +85,15 @@ angular
 		$scope.card = '';
 		$scope.currentLib = '';
 		$scope.nextCard = function(){
-			$scope.currentCard++;
-			if($scope.currentCard > $scope.currentLib.length - 1){
-				$scope.currentCard = 0;
-				shuffle($scope.currentLib);
-			}
-			$scope.showCurrentCard();
+			$scope.hideCard();
+			$timeout(function(){
+				$scope.currentCard++;
+				if($scope.currentCard > $scope.currentLib.length - 1){
+					$scope.currentCard = 0;
+					shuffle($scope.currentLib);
+				}
+				$scope.showCurrentCard();
+			},200);
 		};
 		var shuffle = function(arr){
 			arr.forEach(function(item,i,col){

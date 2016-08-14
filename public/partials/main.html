@@ -7,7 +7,9 @@
 		<li ng-repeat="section in sections">
 			{{section.name}}
 			<ul>
-				<li ng-repeat="subsection in section.subsections" ng-click="load(section.name + '.' + subsection.name)">
+				<li
+					ng-repeat="subsection in section.subsections"
+					ng-click="load(section.name + '.' + subsection.name)">
 					{{subsection.name}}
 				</li>
 			</ul>
@@ -15,7 +17,7 @@
 	</ul>
 
 	<div id="card">
-		<div id="question" ng-click="showCard()" class="pointer">
+		<div id="question" ng-click="toggleShowCard()" class="pointer">
 			{{card.question}}
 		</div>
 		<div class="slide" ng-show="showingCard">

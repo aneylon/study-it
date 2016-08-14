@@ -2,7 +2,7 @@
 	<p>
 		{{test}}
 	</p>
-	
+
 	<ul>
 		<li ng-repeat="section in sections">
 			{{section.name}}
@@ -15,10 +15,16 @@
 	</ul>
 
 	<div id="card">
-		<div id="question" ng-click="showCard()" class="pointer">question</div>
+		<div id="question" ng-click="showCard()" class="pointer">
+			{{card.question}}
+		</div>
 		<div class="slide" ng-show="showingCard">
-			<div id="answer">answer</div>
-			<div id="explain">explain</div>
+			<div id="answer">
+				{{card.answer}}
+			</div>
+			<div id="explain">
+				{{card.explain}}
+			</div>
 		</div>
 	</div>
 

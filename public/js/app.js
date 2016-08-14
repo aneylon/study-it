@@ -61,20 +61,50 @@ angular
 			{name:"A+"},
 			{name:"JavaScript"}
 		];
-		$scope.load = function(cards){
-			console.log("loading ", cards);
-		$http.get('/api/libs/' + cards)
-			.then(function(res){
-				console.log('res data is :', res.data);
-			});
-		}
+		$scope.load = function(lib){
+			// console.log("loading ", lib);
+			$scope.currentLib = cards;
+			shuffle($scope.currentLib);
+			$scope.showCurrentCard();
+			$http.get('/api/libs/' + lib)
+				.then(function(res){
+					console.log('res data is :', res.data);
+				});
+		};
 		$scope.showingCard = false;
 		$scope.showCard = function(){
 			$scope.showingCard = !$scope.showingCard;
-		}
+		};
+		$scope.showCurrentCard = function(){
+			$scope.card = $scope.currentLib[$scope.currentCard];
+		};
+		$scope.currentCard = 0;
+		$scope.card = '';
+		$scope.currentLib = '';
 		$scope.nextCard = function(){
-			console.log("next card");
-		}
+			$scope.currentCard++;
+			if($scope.currentCard > $scope.currentLib.length - 1){
+				$scope.currentCard = 0;
+				shuffle($scope.currentLib);
+			}
+			$scope.showCurrentCard();
+		};
+		var shuffle = function(arr){
+			arr.forEach(function(item,i,col){
+				var rand = Math.floor(Math.random() * arr.length);
+				var temp = item;
+				col[i] = col[rand];
+				col[rand] = temp;
+			});
+		};
+		var cards = [
+			{question:'one',answer:'two',explain:'three'},
+			{question:'1',answer:'2',explain:'3'},
+			{question:'a',answer:'b',explain:'c'},
+			{question:'ay',answer:'bee',explain:'sea'},
+			{question:'red',answer:'green',explain:'blue'}
+		];
+		// end main controller
 	})
 	.controller("aboutCtrl",function($scope){
 		var test = "hello about";

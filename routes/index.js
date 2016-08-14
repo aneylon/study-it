@@ -35,7 +35,7 @@ router.post('/api/signUp', function(req, res){
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
   res.send('signing in ' + JSON.stringify(req.body));
-})
+});
 
 router.post('/api/postIt', function(req, res){
   console.log(req.body);

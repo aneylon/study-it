@@ -21,7 +21,7 @@ router.get('/api/getIt', function(req, res){
 
 router.get('/api/libs/:libName', function(req, res){
   var libName = req.params.libName;
-  res.send('loaded'+ libName);
+  res.send('loaded : '+ libName);
 });
 
 router.post('/api/signUp', function(req, res){

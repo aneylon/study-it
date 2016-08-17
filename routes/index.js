@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Card = require('../models/card');
+var User = require('../models/user');
 
 router.get('/api/setup', function(req, res){
   var card = new Card({
@@ -29,7 +31,21 @@ router.post('/api/signUp', function(req, res){
   //   if exists send error
   //   else add user and send confirmation
   console.log(req.body);
-  res.send('signed up ' + JSON.stringify(req.body));
+  var user = new User({
+    name: req.body.username,
+    password: req.body.password,
+    email: req.body.email,
+    admin: false
+  });
+  // check if user exists
+    // if not, add
+    // if send error / message
+  user.save(function(err){
+    if(err) throw err;
+    console.log('added new user');
+    res.json({success: true});
+  })
+  // res.send('signed up ' + JSON.stringify(req.body));
 });
 
 router.post('/api/signIn', function(req, res){

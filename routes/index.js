@@ -56,7 +56,22 @@ router.post('/api/signIn', function(req, res){
 router.post('/api/postIt', function(req, res){
   console.log(req.body);
   // console.log('posted it');
-  res.send('posted it' + JSON.stringify(req.body));
+// figure out best way to add card to specific lib
+  var card = new Card({
+    question: req.body.question,
+    answer: req.body.answer,
+    explain: req.body.explain
+  });
+// check if card exists
+  // add if not
+  // else, send error
+  card.save(function(err){
+    if(err) throw err;
+    console.log('saved new card');
+    res.json({ success: true });
+  });
+
+  // res.send('posted it' + JSON.stringify(req.body));
 });
 
 router.post('/api/loadLib', function(req, res){

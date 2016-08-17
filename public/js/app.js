@@ -119,7 +119,7 @@ angular
 		var test = "hello contact";
 		$scope.test = test;
 	})
-	.controller("loginCtrl",function($scope, $http){
+	.controller("loginCtrl",function($scope, $http, $location){
 		var test = "hello login";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -133,6 +133,9 @@ angular
 		$http.post('/api/signIn', creds)
 			.then(function(res){
 				console.log(res);
+				// if successful change page
+				$location.path('/');
+				// if not show error
 			});
 		}
 	})
@@ -151,6 +154,11 @@ angular
 			.then(function(res){
 				console.log(res);
 			});
+
+			$scope.username = '';
+			$scope.email = '';
+			$scope.password = '';
+			$scope.passwordTwo = '';
 		};
 	})
 	.controller("adminCtrl",function($scope, $http){
@@ -159,6 +167,7 @@ angular
 		$scope.notValidated = true;
 		$scope.add = function(){
 			var newCard = {
+				libName: $scope.libName,
 				question: $scope.question,
 				answer: $scope.answer,
 				explain: $scope.explain
@@ -169,6 +178,11 @@ angular
 			.then(function(res){
 				console.log(res);
 			});
+			// notify if added and what
+			// or notifiy if existing and not added
+			$scope.question = '';
+			$scope.answer = '';
+			$scope.explain = '';
 		};
 	})
 	.controller("userCtrl",function($scope){

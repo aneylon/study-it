@@ -167,6 +167,7 @@ angular
 		$scope.notValidated = true;
 		$scope.add = function(){
 			var newCard = {
+				libName: $scope.libName,
 				question: $scope.question,
 				answer: $scope.answer,
 				explain: $scope.explain
@@ -177,7 +178,8 @@ angular
 			.then(function(res){
 				console.log(res);
 			});
-
+			// notify if added and what
+			// or notifiy if existing and not added
 			$scope.question = '';
 			$scope.answer = '';
 			$scope.explain = '';

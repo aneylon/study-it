@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var Card = require('../models/card');
+// var Card = require('../models/card');
 var User = require('../models/user');
+
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema;
 
 router.get('/api/setup', function(req, res){
   var card = new Card({
@@ -57,6 +60,13 @@ router.post('/api/postIt', function(req, res){
   console.log(req.body);
   // console.log('posted it');
 // figure out best way to add card to specific lib
+  var cardSchema = new Schema({
+    question: String,
+    answer: String,
+    explain: String
+  });
+  var Card = mongoose.model(req.body.libName, cardSchema);
+// old way
   var card = new Card({
     question: req.body.question,
     answer: req.body.answer,

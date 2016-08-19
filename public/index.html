@@ -14,16 +14,19 @@
 
 	</head>
 	<body ng-app="study-it">
+		<div id="logout" ng-controller="logOutCtrl">
+			<div ng-click="logOut()">LogOut</div>
+		</div>
 		<header>
 			<li><a href="#main">main</a></li>
-			<li><a href="#login">login/out</a></li>
+			<li><a href="#login">login</a></li>
 			<li><a href="#signup">signup</a></li>
 			<li><a href="#admin">admin</a></li>
 			<li><a href="#user">user</a></li>
 		</header>
 
 		<div ng-view></div>
-		
+
 		<footer>
 			<li><a href="#about">about</a></li>
 			<li><a href="#contact">contact</a></li>

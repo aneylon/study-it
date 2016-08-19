@@ -34,6 +34,13 @@ angular
 				redirectTo: '/'
 			})
 	})
+	.controller('logOutCtrl', function($scope, $window){
+		$scope.showLogout = false;
+		$scope.logOut = function(){
+			console.log('logging out');
+			$window.localStorage.clear();
+		}
+	})
 	.controller("mainCtrl",function($scope, $http, $timeout){
 		var test = "hello main";
 		$scope.test = test;
@@ -119,7 +126,7 @@ angular
 		var test = "hello contact";
 		$scope.test = test;
 	})
-	.controller("loginCtrl",function($scope, $http, $location){
+	.controller("loginCtrl",function($scope, $http, $location, $window){
 		var test = "hello login";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -133,13 +140,20 @@ angular
 		$http.post('/api/signIn', creds)
 			.then(function(res){
 				console.log(res);
-				// if successful change page
-				$location.path('/');
-				// if not show error
+				if(res.status === 200){
+					// if successful add token to window
+					$window.localStorage.setItem('study.it', 'logged in');
+					// if successful change page
+					$location.path('/');
+				} else {
+					// if not show error
+						console.log('login failed');
+					// show div with failed login info
+				}
 			});
 		}
 	})
-	.controller("signupCtrl",function($scope, $http){
+	.controller("signupCtrl",function($scope, $http, $window){
 		var test = "hello signup";
 		$scope.test = test;
 		$scope.notValidated = true;
@@ -152,7 +166,14 @@ angular
 			console.log("signing up", newUser);
 		$http.post('/api/signUp', newUser)
 			.then(function(res){
-				console.log(res);
+				console.log(res.data.success);
+				if(res.data.success){
+					$window.localStorage.setItem('study.it', 'signed up');
+					// show sign up success info
+				} else {
+					console.log('signup failed');
+					// show sign up error
+				}
 			});
 
 			$scope.username = '';

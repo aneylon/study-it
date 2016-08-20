@@ -156,6 +156,9 @@ angular
 	.controller("signupCtrl",function($scope, $http, $window){
 		var test = "hello signup";
 		$scope.test = test;
+		$scope.message = '';
+		$scope.showMesage = false;
+		$scope.showSignup = true;
 		$scope.notValidated = true;
 		$scope.signup = function(){
 			var newUser = {
@@ -170,9 +173,16 @@ angular
 				if(res.data.success){
 					$window.localStorage.setItem('study.it', 'signed up');
 					// show sign up success info
+					$scope.message = 'Sign up successful';
+					// hide signup area
+					$scope.showSignup = false;
+					// show message area - green (?)
+					$scope.showMessage = true;
 				} else {
 					console.log('signup failed');
-					// show sign up error
+					// show sign up error - red (?)
+					$scope.message = 'Sign up failed';
+					$scope.showMessage = true;
 				}
 			});
 

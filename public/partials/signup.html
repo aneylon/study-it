@@ -1,7 +1,7 @@
 <div>
 	{{test}}
 	<br>
-	<form name="userSignup">
+	<form name="userSignup" ng-show="showSignup">
 		<input type="text" name="username" placeholder="username" ng-model="username" required>
 		<span class="redText" ng-show="userSignup.username.$invalid && userSignup.username.$dirty">Required</span>
 		<br>
@@ -16,4 +16,7 @@
 		<br>
 		<input type="button" value="signup" ng-click="signup()" ng-disabled="userSignup.$invalid">
 	</form>
+	<div ng-show="showMessage">
+		{{ message }}
+	</div>
 </div>

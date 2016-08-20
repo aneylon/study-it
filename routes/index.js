@@ -39,11 +39,24 @@ router.post('/api/signUp', function(req, res){
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
   // check for existing user
-    // if exists check password
-      // if pw match, login
-      // else error 'incorrect user/pw combo'
-    // else error no such user
-  res.send('signing in ' + JSON.stringify(req.body));
+  User.findOne({name: req.body.username}, function(err, searchResult){
+    // handle null result.
+    if(searchResult.length === 0){
+      // user not found
+      res.send('User not found');
+    } else {
+      console.log('entered pw :', req.body.password);
+      console.log('stored pw :', searchResult.password);
+      if(req.body.password === searchResult.password){
+        console.log('logged in');
+        res.send('logged in');
+      } else {
+        console.log('no pw match');
+        res.send('password does not match');
+      }
+    }
+  });
+  // res.send('signing in ' + JSON.stringify(req.body));
 });
 
 router.post('/api/postIt', function(req, res){

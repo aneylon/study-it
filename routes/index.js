@@ -6,24 +6,6 @@ var User = require('../models/user');
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
-router.get('/api/setup', function(req, res){
-  var card = new Card({
-    question: 'does this work?',
-    answer: 'yes it does.',
-    explain: 'cause you did it right.'
-  });
-  card.save(function(err){
-    if(err) throw err;
-    console.log('saved new card');
-    res.json({ success: true });
-  });
-});
-
-router.get('/api/getIt', function(req, res){
-  // console.log('got it');
-  res.send('got it');
-});
-
 router.get('/api/libs/:libName', function(req, res){
   var libName = req.params.libName;
   res.send('loaded : '+ libName);
@@ -40,19 +22,27 @@ router.post('/api/signUp', function(req, res){
     email: req.body.email,
     admin: false
   });
-  // check if user exists
-    // if not, add
-    // if send error / message
-  user.save(function(err){
-    if(err) throw err;
-    console.log('added new user');
-    res.json({success: true});
-  })
-  // res.send('signed up ' + JSON.stringify(req.body));
+
+  // should a promise be used here?
+  User.find({name: req.body.username}, function(err, searchResult){
+    if(searchResult.length === 0){
+      user.save(function(err){
+        if(err) throw err;
+        res.json({success: true});
+      })
+    } else {
+      res.json({success: false});
+    }
+  });
 });
 
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
+  // check for existing user
+    // if exists check password
+      // if pw match, login
+      // else error 'incorrect user/pw combo'
+    // else error no such user
   res.send('signing in ' + JSON.stringify(req.body));
 });
 
@@ -93,6 +83,24 @@ router.post('/api/loadLib', function(req, res){
   //  res.json(results);
   // })
   res.send('looking for ' + libName);
+});
+
+router.get('/api/getIt', function(req, res){
+  // console.log('got it');
+  res.send('got it');
+});
+
+router.get('/api/setup', function(req, res){
+  var card = new Card({
+    question: 'does this work?',
+    answer: 'yes it does.',
+    explain: 'cause you did it right.'
+  });
+  card.save(function(err){
+    if(err) throw err;
+    console.log('saved new card');
+    res.json({ success: true });
+  });
 });
 
 module.exports = router;

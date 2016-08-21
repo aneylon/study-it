@@ -205,12 +205,13 @@ angular
 			};
 			console.log("adding new stuff", newCard);
 
-		$http.post('/api/postIt', newCard)
+		$http.post('/api/addCard', newCard)
 			.then(function(res){
 				console.log(res);
 			});
 			// notify if added and what
 			// or notifiy if existing and not added
+			$scope.libName = '';
 			$scope.question = '';
 			$scope.answer = '';
 			$scope.explain = '';

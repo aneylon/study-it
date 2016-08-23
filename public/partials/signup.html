@@ -5,17 +5,24 @@
 		<input type="text" name="username" placeholder="username" ng-model="username" required>
 		<span class="redText" ng-show="userSignup.username.$invalid && userSignup.username.$dirty">Required</span>
 		<br>
-		<input type="text" name="email" placeholder="email" ng-model="email" required>
-		<span class="redText" ng-show="userSignup.email.$invalid && userSignup.email.$dirty">Required</span>
+		<input type="email" name="email" placeholder="email" ng-model="email" required>
+		<span class="redText" ng-show="userSignup.email.$invalid && userSignup.email.$dirty">Required, must be valid email format</span>
 		<br>
 		<input type="password" name="passwordOne" placeholder="password" ng-model="password" required>
 		<span class="redText" ng-show="userSignup.passwordOne.$invalid && userSignup.passwordOne.$dirty">Required</span>
+		<span class="redText" ng-show="password.length < 8 && userSignup.passwordOne.$dirty">must be 8 characters or more</span>
 		<br>
 		<input type="password" name="passwordTwo" placeholder="confirm" ng-model="passwordTwo" required>
 		<span class="redText" ng-show="userSignup.passwordTwo.$invalid && userSignup.passwordTwo.$dirty">Required</span>
+		<span class="redText" ng-show="passwordTwo !== password && userSignup.passwordTwo.$dirty">must match</span>
 		<br>
 		<input type="button" value="signup" ng-click="signup()" ng-disabled="userSignup.$invalid">
 	</form>
+	<div class="info">
+		<p>
+			Please choose a unique phassphrase / password of 8 characters or more.
+		</p>
+	</div>
 	<div ng-show="showMessage">
 		{{ message }}
 	</div>

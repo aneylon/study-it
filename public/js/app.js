@@ -70,12 +70,13 @@ angular
 		];
 		$scope.load = function(lib){
 			console.log('loading :', lib);
-			$scope.currentLib = cards;
-			shuffle($scope.currentLib);
-			$scope.showCurrentCard();
+			// $scope.currentLib = cards;
 			$http.get('/api/libs/' + lib)
 				.then(function(res){
 					console.log('res data is :', res.data);
+					$scope.currentLib = res.data;
+					shuffle($scope.currentLib);
+					$scope.showCurrentCard();
 				});
 		};
 		$scope.showingCard = false;
@@ -103,6 +104,7 @@ angular
 			},200);
 		};
 		var shuffle = function(arr){
+			console.log('shuffling');
 			arr.forEach(function(item,i,col){
 				var rand = Math.floor(Math.random() * arr.length);
 				var temp = item;

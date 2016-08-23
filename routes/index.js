@@ -11,13 +11,20 @@ var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + proce
 
 router.get('/api/libs/:libName', function(req, res){
   var libName = req.params.libName;
-  res.send('loaded : '+ libName);
+
+  MongoClient.connect(url,function(err, db){
+    if(err)console.log(err);
+    console.log('connected');
+
+    var collection = db.collection(libName);
+    collection.find({}).toArray(function(err,docs){
+      // res.send('loaded : '+ libName);
+      res.json(docs);
+    });
+  });
 });
 
 router.post('/api/signUp', function(req, res){
-  // check if user exists
-  //   if exists send error
-  //   else add user and send confirmation
   console.log(req.body);
   var user = new User({
     name: req.body.username,
@@ -68,11 +75,10 @@ router.post('/api/addCard', function(req, res){
   MongoClient.connect(url,function(err, db){
     if(err)console.log(err);
     console.log('connected');
-    // check if exists
-    // if not then insert
 
     insertCard(db,function(){
-      db.close();
+      db.close(); // not using, need to use?
+      res.send('inserted');
     });
   });
 
@@ -88,69 +94,9 @@ router.post('/api/addCard', function(req, res){
           explain: req.body.explain
         });
       }
+      callback();
     });
   }
-  // console.log('posted it');
-// figure out best way to add card to specific lib
-  // var cardSchema = new Schema({
-  //   question: String,
-  //   answer: String,
-  //   explain: String
-  // });
-  // var Card = mongoose.model(req.body.libName, cardSchema);
-  //
-  // Card.findOne({question: req.body.question}, function(err, searchResult){
-  //   if(err)console.log('error :', err);
-  //   if(searchResult){
-  //     // exists so send message
-  //     console.log('result :', searchResult);
-  //     res.send('already exists');
-  //   } else {
-  //     // add card
-  //     var card = new Card({
-  //       question: req.body.question,
-  //       answer: req.body.answer,
-  //       explain: req.body.explain
-  //     });
-  //
-  //     card.save(function(err){
-  //       if(err) throw err;
-  //       console.log('saved new card');
-  //       res.json({ success: true });
-  //     });
-  //   }
-  // });
-  // add notice of added or not
-  // res.send('posted it' + JSON.stringify(req.body));
-});
-
-router.post('/api/loadLib', function(req, res){
-  // make post request with name of lib to load {name : 'libName'}
-  var libName = req.body.name;
-  console.log('looking for', libName);
-  // get ref to DB?
-  // libName.find({}, function(err, results){
-  //  res.json(results);
-  // })
-  res.send('looking for ' + libName);
-});
-
-router.get('/api/getIt', function(req, res){
-  // console.log('got it');
-  res.send('got it');
-});
-
-router.get('/api/setup', function(req, res){
-  var card = new Card({
-    question: 'does this work?',
-    answer: 'yes it does.',
-    explain: 'cause you did it right.'
-  });
-  card.save(function(err){
-    if(err) throw err;
-    console.log('saved new card');
-    res.json({ success: true });
-  });
 });
 
 module.exports = router;

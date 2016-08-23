@@ -63,14 +63,14 @@ router.post('/api/signIn', function(req, res){
 });
 
 router.post('/api/addCard', function(req, res){
-  console.log(req.body);
+  console.log('adding :', req.body);
 
   MongoClient.connect(url,function(err, db){
     if(err)console.log(err);
     console.log('connected');
     // check if exists
     // if not then insert
-    
+
     insertCard(db,function(){
       db.close();
     });
@@ -78,10 +78,16 @@ router.post('/api/addCard', function(req, res){
 
   var insertCard = function(db, callback){
     var collection = db.collection(req.body.libName);
-    collection.insertOne({
-      question: req.body.question,
-      answer: req.body.answer,
-      explain: req.body.explain
+    collection.find({question: req.body.question}).toArray(function(err,docs){
+      console.log('found:');
+      console.dir(docs);
+      if(docs.length === 0){
+        collection.insertOne({
+          question: req.body.question,
+          answer: req.body.answer,
+          explain: req.body.explain
+        });
+      }
     });
   }
   // console.log('posted it');

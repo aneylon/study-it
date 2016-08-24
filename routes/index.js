@@ -9,6 +9,34 @@ var Schema = mongoose.Schema;
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + process.env.DB_HOST;
 
+router.get('/api/libs/all', function(req, res){
+  var list = [
+    {
+      name:"日本語",
+      subsections: [
+        {name:"Lv5"},
+        {name:"Lv4"}
+      ]},
+    {
+      name:"中文",
+      subsections: [
+        {name:"hsk1"},
+        {name:"hsk2"}
+      ]
+    },
+    {
+      name:"한국어",
+      subsections:[
+        {name:"topik I 1"},
+        {name:"topik I 2"}
+      ]
+    },
+    {name:"A+"},
+    {name:"JavaScript"}
+  ];
+  res.json(list);
+});
+
 router.get('/api/libs/:libName', function(req, res){
   var libName = req.params.libName;
 

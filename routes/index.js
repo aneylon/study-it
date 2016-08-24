@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 // var Card = require('../models/card');
 var User = require('../models/user');
-
+var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
@@ -26,9 +26,10 @@ router.get('/api/libs/:libName', function(req, res){
 
 router.post('/api/signUp', function(req, res){
   console.log(req.body);
+  hashedPW = bcrypt.hashSync(req.body.password, null);
   var user = new User({
     name: req.body.username,
-    password: req.body.password,
+    password: hashedPW,
     email: req.body.email,
     admin: false
   });
@@ -55,14 +56,20 @@ router.post('/api/signIn', function(req, res){
       // user not found
       res.send('User not found');
     } else {
-      console.log('entered pw :', req.body.password);
+      enteredPW = bcrypt.hashSync(req.body.password, null);
+      // console.log('entered pw :', req.body.password);
+      console.log('entered pw :', enteredPW);
       console.log('stored pw :', searchResult.password);
-      if(req.body.password === searchResult.password){
+      var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password);
+      // var pwsMatch = bcrypt.compareSync(enteredPW, searchResult.password);
+      // if(req.body.password === searchResult.password){
+      if(pwsMatch){
         console.log('logged in');
         res.send('logged in');
       } else {
         console.log('no pw match');
         res.send('password does not match');
+        // send jwt if successful
       }
     }
   });

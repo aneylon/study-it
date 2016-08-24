@@ -26,7 +26,7 @@ router.get('/api/libs/:libName', function(req, res){
 
 router.post('/api/signUp', function(req, res){
   console.log(req.body);
-  hashedPW = bcrypt.hashSync(req.body.password, null);
+  hashedPW = bcrypt.hashSync(req.body.password, bcrypt.genSalt);
   var user = new User({
     name: req.body.username,
     password: hashedPW,
@@ -49,20 +49,11 @@ router.post('/api/signUp', function(req, res){
 
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
-  // check for existing user
   User.findOne({name: req.body.username}, function(err, searchResult){
-    // handle null result.
     if(searchResult.length === 0){
-      // user not found
       res.send('User not found');
     } else {
-      enteredPW = bcrypt.hashSync(req.body.password, null);
-      // console.log('entered pw :', req.body.password);
-      console.log('entered pw :', enteredPW);
-      console.log('stored pw :', searchResult.password);
       var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password);
-      // var pwsMatch = bcrypt.compareSync(enteredPW, searchResult.password);
-      // if(req.body.password === searchResult.password){
       if(pwsMatch){
         console.log('logged in');
         res.send('logged in');
@@ -73,7 +64,6 @@ router.post('/api/signIn', function(req, res){
       }
     }
   });
-  // res.send('signing in ' + JSON.stringify(req.body));
 });
 
 router.post('/api/addCard', function(req, res){

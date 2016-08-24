@@ -68,6 +68,18 @@ angular
 			{name:"A+"},
 			{name:"JavaScript"}
 		];
+
+		$scope.getSections = function(){
+			var sectionData = '';
+			$http.get('/api/libs/all')
+				.then(function(res){
+					console.log(res.data);
+					sectionData = res.data;
+				});
+				return sectionData;
+		}
+		// $scope.sections = $scope.getSections();
+
 		$scope.load = function(lib){
 			console.log('loading :', lib);
 			// $scope.currentLib = cards;

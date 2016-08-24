@@ -1,88 +1,33 @@
-Authentication
-  Middleware
-  JWT
-  logout
-  cookies?
-
-Add user
-  Check if existing
-Login user
-Keep jwt to stay logged in
-Logout
-
-Load and randomize cards
- - save user response
-
-Post route to load collections
-Post to add vocab.
-  Check if existing
-
+save user response to questions
 Save user data
 Show user data
+  charts
 
 better animation on cards
 
-x Timer / schedule
- x Mail gun?
- x ejs templating
- 
-xValidation
+Authentication
+  Middleware
+  JWT
+  local storage vs cookies?
 
-x add dotenv
-x configure heroku
+Glup / Grunt
+Tests
 
-x set up travis
-x set up tests
-x set up nodemon
+Angulartics
 
-x add animate
-x add charts
+Style
 
-do real tests
-gulp / grunt ?
+Lessons
+  Learn
+  Review
+  Test
 
-layout
-style
-local data
+Flash Cards - mvp
+  question
+  answer
+  explanation
 
-	question
-	answer
-	explanation
+Quizes
 
-authentication
-
-users
-	username
-	name
-	contact - email
-	password
-	is admin
-
-flesh out views
-
-	user info
-	about
-	contact
-
-// sections
-	// learn
-	// review
-	// test
-
-	// multiple choice
-	// flash cards
-	// lessons
-
-// extras
-	// chat
-	// forums
-
-// db info
-To connect using the mongo shell:
-mongo ds019482.mlab.com:19482/study-it -u <dbuser> -p <dbpassword>
-
-To connect using a driver via the standard MongoDB URI (what's this?):
-  mongodb://<dbuser>:<dbpassword>@ds019482.mlab.com:19482/study-it
-
-U: aneylon
-P: standard
+Forums
+Chat

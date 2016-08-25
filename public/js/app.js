@@ -39,7 +39,7 @@ angular
 		$scope.logOut = function(){
 			console.log('logging out');
 			$window.localStorage.clear();
-		}
+		};
 	})
 	.controller("mainCtrl",function($scope, $http, $timeout){
 		var test = "hello main";
@@ -54,7 +54,7 @@ angular
 					$scope.sections = sectionData;
 				});
 				return sectionData;
-		}
+		};
 		$timeout(function(){
 			$scope.getSections();
 		});
@@ -76,7 +76,7 @@ angular
 		};
 		$scope.hideCard = function(){
 			$scope.showingCard = false;
-		}
+		};
 		$scope.showCurrentCard = function(){
 			$scope.card = $scope.currentLib[$scope.currentCard];
 		};

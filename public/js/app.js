@@ -44,41 +44,20 @@ angular
 	.controller("mainCtrl",function($scope, $http, $timeout){
 		var test = "hello main";
 		$scope.test = test;
-		$scope.sections = [
-			{
-				name:"日本語",
-				subsections: [
-					{name:"Lv5"},
-					{name:"Lv4"}
-				]},
-			{
-				name:"中文",
-				subsections: [
-					{name:"hsk1"},
-					{name:"hsk2"}
-				]
-			},
-			{
-				name:"한국어",
-				subsections:[
-					{name:"topik I 1"},
-					{name:"topik I 2"}
-				]
-			},
-			{name:"A+"},
-			{name:"JavaScript"}
-		];
-
+		$scope.sections = [];
 		$scope.getSections = function(){
-			var sectionData = '';
-			$http.get('/api/libs/all')
+				var sectionData = '';
+				$http.get('/api/libs/all')
 				.then(function(res){
 					console.log(res.data);
 					sectionData = res.data;
+					$scope.sections = sectionData;
 				});
 				return sectionData;
 		}
-		// $scope.sections = $scope.getSections();
+		$timeout(function(){
+			$scope.getSections();
+		});
 
 		$scope.load = function(lib){
 			console.log('loading :', lib);

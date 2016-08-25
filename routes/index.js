@@ -21,7 +21,8 @@ router.get('/api/libs/all', function(req, res){
       name:"中文",
       subsections: [
         {name:"hsk1"},
-        {name:"hsk2"}
+        {name:"hsk2"},
+        {name:"hsk3"}
       ]
     },
     {

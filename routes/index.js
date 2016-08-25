@@ -16,32 +16,6 @@ router.get('/api/libs/all', function(req, res){
       res.json(docs);
     });
   });
-  // var list = [
-  //   {
-  //     name:"日本語",
-  //     subsections: [
-  //       {name:"Lv5"},
-  //       {name:"Lv4"}
-  //     ]},
-  //   {
-  //     name:"中文",
-  //     subsections: [
-  //       {name:"hsk1"},
-  //       {name:"hsk2"},
-  //       {name:"hsk3"}
-  //     ]
-  //   },
-  //   {
-  //     name:"한국어",
-  //     subsections:[
-  //       {name:"topik I 1"},
-  //       {name:"topik I 2"}
-  //     ]
-  //   },
-  //   {name:"A+"},
-  //   {name:"JavaScript"}
-  // ];
-  // res.json(list);
 });
 
 router.get('/api/libs/:libName', function(req, res){
@@ -53,7 +27,6 @@ router.get('/api/libs/:libName', function(req, res){
 
     var collection = db.collection(libName);
     collection.find({}).toArray(function(err,docs){
-      // res.send('loaded : '+ libName);
       res.json(docs);
     });
   });
@@ -115,6 +88,28 @@ router.post('/api/addCard', function(req, res){
   });
 
   var insertCard = function(db, callback){
+    var libList = db.collection('libList');
+    libList.find({name: req.body.libName}).toArray(function(err,docs){
+      console.log('found this lib in list', docs);
+      if(docs.length === 0){
+        console.log('nothing found');
+        libList.insertOne({
+          name: req.body.libName,
+          subSections: [
+            {name: req.body.sectName}
+          ]
+        });
+      } else {
+        if(docs[0].subSections.indexOf(req.body.sectName) === -1){
+          console.log('adding ', req.body.sectName, 'to', req.body.libName);
+          libList.updateOne(
+            {name: req.body.libName},
+            {$addToSet: {subSections:{name: req.body.sectName}}}
+          );
+        }
+      }
+    });
+
     var collection = db.collection(req.body.libName + '.' + req.body.sectName);
     collection.find({question: req.body.question}).toArray(function(err,docs){
       console.log('found:');

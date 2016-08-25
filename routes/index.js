@@ -10,32 +10,38 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + process.env.DB_HOST;
 
 router.get('/api/libs/all', function(req, res){
-  var list = [
-    {
-      name:"日本語",
-      subsections: [
-        {name:"Lv5"},
-        {name:"Lv4"}
-      ]},
-    {
-      name:"中文",
-      subsections: [
-        {name:"hsk1"},
-        {name:"hsk2"},
-        {name:"hsk3"}
-      ]
-    },
-    {
-      name:"한국어",
-      subsections:[
-        {name:"topik I 1"},
-        {name:"topik I 2"}
-      ]
-    },
-    {name:"A+"},
-    {name:"JavaScript"}
-  ];
-  res.json(list);
+  MongoClient.connect(url,function(err,db){
+    var collection = db.collection('libList');
+    collection.find({}).toArray(function(err, docs){
+      res.json(docs);
+    });
+  });
+  // var list = [
+  //   {
+  //     name:"日本語",
+  //     subsections: [
+  //       {name:"Lv5"},
+  //       {name:"Lv4"}
+  //     ]},
+  //   {
+  //     name:"中文",
+  //     subsections: [
+  //       {name:"hsk1"},
+  //       {name:"hsk2"},
+  //       {name:"hsk3"}
+  //     ]
+  //   },
+  //   {
+  //     name:"한국어",
+  //     subsections:[
+  //       {name:"topik I 1"},
+  //       {name:"topik I 2"}
+  //     ]
+  //   },
+  //   {name:"A+"},
+  //   {name:"JavaScript"}
+  // ];
+  // res.json(list);
 });
 
 router.get('/api/libs/:libName', function(req, res){
@@ -109,7 +115,7 @@ router.post('/api/addCard', function(req, res){
   });
 
   var insertCard = function(db, callback){
-    var collection = db.collection(req.body.libName);
+    var collection = db.collection(req.body.libName + '.' + req.body.sectName);
     collection.find({question: req.body.question}).toArray(function(err,docs){
       console.log('found:');
       console.dir(docs);

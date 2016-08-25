@@ -193,6 +193,7 @@ angular
 		$scope.add = function(){
 			var newCard = {
 				libName: $scope.libName,
+				sectName: $scope.sectName,
 				question: $scope.question,
 				answer: $scope.answer,
 				explain: $scope.explain
@@ -206,6 +207,7 @@ angular
 			// notify if added and what
 			// or notifiy if existing and not added
 			$scope.libName = '';
+			$scope.sectName = '';
 			$scope.question = '';
 			$scope.answer = '';
 			$scope.explain = '';

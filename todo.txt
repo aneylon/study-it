@@ -28,6 +28,12 @@ Flash Cards - mvp
   explanation
 
 Quizes
+  multiple choice
+  true / false
 
 Forums
+  message
+    response
+  up/down vote
+  
 Chat

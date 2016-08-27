@@ -5,7 +5,7 @@ var User = require('../models/user');
 var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
-
+var jwt = require('jsonwebtoken');
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + process.env.DB_HOST;
 
@@ -64,7 +64,18 @@ router.post('/api/signIn', function(req, res){
       var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password);
       if(pwsMatch){
         console.log('logged in');
-        res.send('logged in');
+
+        var token = jwt.sign(searchResult, process.env.SECRET, {
+          expiresIn: 1440 // 24 hrs
+        });
+
+        // res.send('logged in');
+        res.json({
+          success: true,
+          message: 'Logged in.',
+          token: token
+        });
+
       } else {
         console.log('no pw match');
         res.send('password does not match');
@@ -72,6 +83,23 @@ router.post('/api/signIn', function(req, res){
       }
     }
   });
+});
+
+// middleware to check JWT
+router.use(function(req, res, next){
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+  if(token){
+    jwt.verify(token, process.env.SECRET, function(err, decoded){
+      if(err){
+        return res.json({ success: false, message:'Failed to authenticate token.'});
+      } else {
+        req.decoded =decoded;
+        next();
+      }
+    });
+  } else {
+    return res.status(403).send({ success: false, message:'No token provided'});
+  }
 });
 
 router.post('/api/addCard', function(req, res){

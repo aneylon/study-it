@@ -1,0 +1,30 @@
+<div>
+  <!-- question -->
+  <div>
+    <div>
+      { question.number }
+    </div>
+    <div>
+      { question.text }
+    </div>
+  </div>
+  <!-- answers -->
+  <div>
+    <div ng-repeat="answer in answers">
+      { answer.text }
+    </div>
+  </div>
+  <!-- buttons -->
+  <div>
+    <button>
+      previous
+    </button>
+    <button>
+      next
+    </button>
+  </div>
+
+  <div>
+    { numberAnswered }
+  </div>
+</div>

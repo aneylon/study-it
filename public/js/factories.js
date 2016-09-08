@@ -44,6 +44,19 @@ angular.module('authServies', [])
   })
   .factory('AuthInterceptor', function($q, AuthToken){
     var interceptorFactory = {};
+    interceptorFactory.request = function(config){
+      var token = AuthToken.getToken();
+      if(token)
+        config.headers['x-access-token'] = token;
 
+      return config;
+    };
+    interceptorFactory.responseError = function(response){
+      if(response.status == 403) {
+        AuthToken.setToken();
+        $location.path('/login');
+      }
+      return $q.reject(response);
+    };
     return interceptorFactory;
   })

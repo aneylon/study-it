@@ -34,24 +34,24 @@ router.get('/api/libs/:libName', function(req, res){
 
 router.post('/api/signUp', function(req, res){
   console.log(req.body);
-  hashedPW = bcrypt.hashSync(req.body.password, bcrypt.genSalt);
-  var user = new User({
-    name: req.body.username,
-    password: hashedPW,
-    email: req.body.email,
-    admin: false
-  });
-
-  // should a promise be used here?
-  User.find({name: req.body.username}, function(err, searchResult){
-    if(searchResult.length === 0){
-      user.save(function(err){
-        if(err) throw err;
-        res.json({success: true});
-      })
-    } else {
-      res.json({success: false});
-    }
+  bcrypt.hash(req.body.password, null, null, function(err, hash){
+    var user = new User({
+      name: req.body.username,
+      password: hash,
+      email: req.body.email,
+      admin: false
+    });
+    // should a promise be used here?
+    User.find({name: req.body.username}, function(err, searchResult){
+      if(searchResult.length === 0){
+        user.save(function(err){
+          if(err) throw err;
+          res.json({success: true});
+        })
+      } else {
+        res.json({success: false});
+      }
+    });
   });
 });
 
@@ -86,21 +86,21 @@ router.post('/api/signIn', function(req, res){
 });
 
 // middleware to check JWT
-router.use(function(req, res, next){
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
-  if(token){
-    jwt.verify(token, process.env.SECRET, function(err, decoded){
-      if(err){
-        return res.json({ success: false, message:'Failed to authenticate token.'});
-      } else {
-        req.decoded =decoded;
-        next();
-      }
-    });
-  } else {
-    return res.status(403).send({ success: false, message:'No token provided'});
-  }
-});
+// router.use(function(req, res, next){
+//   var token = req.body.token || req.query.token || req.headers['x-access-token'];
+//   if(token){
+//     jwt.verify(token, process.env.SECRET, function(err, decoded){
+//       if(err){
+//         return res.json({ success: false, message:'Failed to authenticate token.'});
+//       } else {
+//         req.decoded =decoded;
+//         next();
+//       }
+//     });
+//   } else {
+//     return res.status(403).send({ success: false, message:'No token provided'});
+//   }
+// });
 
 router.post('/api/addCard', function(req, res){
   console.log('adding :', req.body);

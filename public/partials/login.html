@@ -1,13 +1,13 @@
 <div>
-	{{test}}
+	{{login.test}}
 	<br>
 	<form name="loginForm">
-	<input type="text" name="username" placeholder="username" ng-model="username" required>
+	<input type="text" name="username" placeholder="username" ng-model="login.username" required>
   <span class="redText" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">Username is required</span>
 	<br>
-	<input type="password" name="password" placeholder="password" ng-model="password" required>
+	<input type="password" name="password" placeholder="password" ng-model="login.password" required>
   <span class="redText" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">Password is required</span>
 	<br>
-	<input type="button" value="login" ng-click="login()" ng-disabled="loginForm.$invalid">
+	<input type="button" value="login" ng-click="login.login()" ng-disabled="loginForm.$invalid">
 	</form>
 </div>

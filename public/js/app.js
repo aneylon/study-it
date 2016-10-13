@@ -60,8 +60,8 @@ angular
 		});
 
 		$scope.load = function(lib){
-			console.log('loading :', lib);
-			// $scope.currentLib = cards;
+			// hide shown card before loading next lib
+			$scope.hideCard();
 			$http.get('/api/libs/' + lib)
 				.then(function(res){
 					console.log('res data is :', res.data);

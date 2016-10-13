@@ -6,7 +6,12 @@
 
 [Test site](https://study-it-test.herokuapp.com)
 
-## setup
-```
-npm run setup
-```
+## Setup
+### Local
+- add .env file with required information
+  * DB_HOST
+  * DB_PASS
+  * DB_USER
+  * MAILGUN_DOMAIN
+  * MAILGUN_KEY
+  * SECRET

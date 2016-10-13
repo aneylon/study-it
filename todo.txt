@@ -1,3 +1,8 @@
+Flash Cards - mvp
+  question
+  answer
+  explanation
+
 save user response to questions
 Save user data
 Show user data
@@ -8,24 +13,34 @@ better animation on cards
 Authentication
   Middleware
   JWT
-  local storage vs cookies?
+  local storage
+
+Add new Cards
+  update lib list when new added
+  show libs and sub libs correctly when selected
+
 
 Glup / Grunt
+  package
+  minify - uglify
+
 Tests
 
 Angulartics
 
 Style
+Mobile first
 
+Future Features
+
+User settings for daily / weekly emails
+Algorithm for reviewing viewed items
+
+-------
 Lessons
   Learn
   Review
   Test
-
-Flash Cards - mvp
-  question
-  answer
-  explanation
 
 Quizes
   multiple choice
@@ -35,5 +50,5 @@ Forums
   message
     response
   up/down vote
-  
+
 Chat

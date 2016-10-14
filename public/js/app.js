@@ -1,5 +1,30 @@
 angular
 	.module("study-it",["ngRoute","ngAnimate","chart.js"])
+	.factory('Auth', function($window){
+		var authObj = {};
+		var loggedIn = false;
+		authObj.isLoggedIn = function(){
+			return loggedIn;
+		}
+		authObj.signUp = function(){
+			// to do
+			// move signup code here
+		}
+		authObj.logIn = function(){
+			// to do
+			// move login code here
+		}
+		authObj.logOut = function(){
+			$window.localStorage.setItem('study-it','');
+		}
+		authObj.getToken = function(){
+			$window.localStorage.getItem('study-it');
+		}
+		authObj.checkToken = function(){
+			// to do add route to verify token?
+		}
+		return authObj;
+	})
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/',{
@@ -136,9 +161,9 @@ angular
 			}
 		$http.post('/api/signIn', creds)
 			.then(function(res){
-				if(res.status === 200){
+				if(res.data.success){
 					// if successful add token to window
-					$window.localStorage.setItem('study.it', 'logged in');
+					$window.localStorage.setItem('study.it', res.data.token);
 					// if successful change page
 					$location.path('/');
 				} else {
@@ -150,6 +175,7 @@ angular
 		}
 	})
 	.controller("signupCtrl",function($http, $window){
+		console.log($window.localStorage.getItem('study.it'));
 		this.test = "hello signup";
 		// this.test = test;
 		this.message = '';
@@ -167,7 +193,7 @@ angular
 			.then(function(res){
 				console.log(res.data.success);
 				if(res.data.success){
-					$window.localStorage.setItem('study.it', 'signed up');
+					$window.localStorage.setItem('study.it', res.data.token);
 					// show sign up success info
 					this.message = 'Sign up successful';
 					// hide signup area

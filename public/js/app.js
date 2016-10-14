@@ -1,42 +1,74 @@
 angular
 	.module("study-it",["ngRoute","ngAnimate","chart.js"])
+	.factory('Auth', function($window){
+		var authObj = {};
+		var loggedIn = false;
+		authObj.isLoggedIn = function(){
+			return loggedIn;
+		}
+		authObj.signUp = function(){
+			// to do
+			// move signup code here
+		}
+		authObj.logIn = function(){
+			// to do
+			// move login code here
+		}
+		authObj.logOut = function(){
+			$window.localStorage.setItem('study-it','');
+		}
+		authObj.getToken = function(){
+			$window.localStorage.getItem('study-it');
+		}
+		authObj.checkToken = function(){
+			// to do add route to verify token?
+		}
+		return authObj;
+	})
 	.config(function($routeProvider){
 		$routeProvider
 			.when('/',{
 				templateUrl: 'partials/main.html',
 				controller: 'mainCtrl'
+				// controllerAs: 'main'
 			})
 			.when('/about',{
 				templateUrl: 'partials/about.html',
-				controller: 'aboutCtrl'
+				controller: 'aboutCtrl',
+				controllerAs: 'about'
 			})
 			.when('/contact',{
 				templateUrl: 'partials/contact.html',
-				controller: 'contactCtrl'
+				controller: 'contactCtrl',
+				controllerAs: 'contact'
 			})
 			.when('/login',{
 				templateUrl: 'partials/login.html',
-				controller: 'loginCtrl'
+				controller: 'loginCtrl',
+				controllerAs: 'login'
 			})
 			.when('/signup',{
 				templateUrl: 'partials/signup.html',
-				controller: 'signupCtrl'
+				controller: 'signupCtrl',
+				controllerAs: 'signup'
 			})
 			.when('/admin',{
 				templateUrl: 'partials/admin.html',
-				controller: 'adminCtrl'
+				controller: 'adminCtrl',
+				controllerAs: 'admin'
 			})
 			.when('/user',{
 				templateUrl: 'partials/user.html',
-				controller: 'userCtrl'
+				controller: 'userCtrl',
+				controllerAs: 'user'
 			})
 			.otherwise({
 				redirectTo: '/'
 			})
 	})
-	.controller('logOutCtrl', function($scope, $window){
-		$scope.showLogout = false;
-		$scope.logOut = function(){
+	.controller('logOutCtrl', function($window){
+		this.showLogout = false;
+		this.logOut = function(){
 			console.log('logging out');
 			$window.localStorage.clear();
 		};
@@ -60,8 +92,8 @@ angular
 		});
 
 		$scope.load = function(lib){
-			console.log('loading :', lib);
-			// $scope.currentLib = cards;
+			// hide shown card before loading next lib
+			$scope.hideCard();
 			$http.get('/api/libs/' + lib)
 				.then(function(res){
 					console.log('res data is :', res.data);
@@ -112,31 +144,26 @@ angular
 		];
 		// end main controller
 	})
-	.controller("aboutCtrl",function($scope){
-		var test = "hello about";
-		$scope.test = test;
+	.controller("aboutCtrl",function(){
+		this.test = "all about it";
 	})
-	.controller("contactCtrl",function($scope){
-		var test = "hello contact";
-		$scope.test = test;
+	.controller("contactCtrl",function(){
+		this.test = "contact as";
 	})
-	.controller("loginCtrl",function($scope, $http, $location, $window){
-		var test = "hello login";
-		$scope.test = test;
-		$scope.notValidated = true;
-		$scope.validate = function(){ $scope.notValidated = !$scope.notValidated; };
-		$scope.login = function(){
+	.controller("loginCtrl",function($http, $location, $window){
+		this.test = "hello login";
+		this.notValidated = true;
+		this.validate = function(){ this.notValidated = !this.notValidated; };
+		this.login = function(){
 			var creds = {
-				username: $scope.username,
-				password: $scope.password
+				username: this.username,
+				password: this.password
 			}
-			console.log("loging in", creds);
 		$http.post('/api/signIn', creds)
 			.then(function(res){
-				console.log(res);
-				if(res.status === 200){
+				if(res.data.success){
 					// if successful add token to window
-					$window.localStorage.setItem('study.it', 'logged in');
+					$window.localStorage.setItem('study.it', res.data.token);
 					// if successful change page
 					$location.path('/');
 				} else {
@@ -147,56 +174,57 @@ angular
 			});
 		}
 	})
-	.controller("signupCtrl",function($scope, $http, $window){
-		var test = "hello signup";
-		$scope.test = test;
-		$scope.message = '';
-		$scope.showMesage = false;
-		$scope.showSignup = true;
-		$scope.notValidated = true;
-		$scope.signup = function(){
+	.controller("signupCtrl",function($http, $window){
+		console.log($window.localStorage.getItem('study.it'));
+		this.test = "hello signup";
+		// this.test = test;
+		this.message = '';
+		this.showMesage = false;
+		this.showSignup = true;
+		this.notValidated = true;
+		this.addUser = function(){
 			var newUser = {
-				username: $scope.username,
-				email: $scope.email,
-				password: $scope.password
+				username: this.username,
+				email: this.email,
+				password: this.password
 			}
 			console.log("signing up", newUser);
 		$http.post('/api/signUp', newUser)
 			.then(function(res){
 				console.log(res.data.success);
 				if(res.data.success){
-					$window.localStorage.setItem('study.it', 'signed up');
+					$window.localStorage.setItem('study.it', res.data.token);
 					// show sign up success info
-					$scope.message = 'Sign up successful';
+					this.message = 'Sign up successful';
 					// hide signup area
-					$scope.showSignup = false;
+					this.showSignup = false;
 					// show message area - green (?)
-					$scope.showMessage = true;
+					this.showMessage = true;
 				} else {
 					console.log('signup failed');
 					// show sign up error - red (?)
-					$scope.message = 'Sign up failed';
-					$scope.showMessage = true;
+					this.message = 'Sign up failed';
+					this.showMessage = true;
 				}
 			});
 
-			$scope.username = '';
-			$scope.email = '';
-			$scope.password = '';
-			$scope.passwordTwo = '';
+			this.username = '';
+			this.email = '';
+			this.password = '';
+			this.passwordTwo = '';
 		};
 	})
-	.controller("adminCtrl",function($scope, $http){
+	.controller("adminCtrl",function($http){
 		var test = "hello admin";
-		$scope.test = test;
-		$scope.notValidated = true;
-		$scope.add = function(){
+		this.test = test;
+		this.notValidated = true;
+		this.add = function(){
 			var newCard = {
-				libName: $scope.libName,
-				sectName: $scope.sectName,
-				question: $scope.question,
-				answer: $scope.answer,
-				explain: $scope.explain
+				libName: this.libName,
+				sectName: this.sectName,
+				question: this.question,
+				answer: this.answer,
+				explain: this.explain
 			};
 			console.log("adding new stuff", newCard);
 
@@ -206,24 +234,24 @@ angular
 				});
 			// notify if added and what
 			// or notifiy if existing and not added
-			$scope.libName = '';
-			$scope.sectName = '';
-			$scope.question = '';
-			$scope.answer = '';
-			$scope.explain = '';
+			this.libName = '';
+			this.sectName = '';
+			this.question = '';
+			this.answer = '';
+			this.explain = '';
 		};
 	})
-	.controller("userCtrl",function($scope){
-		var test = "hello user";
-		$scope.test = test;
+	.controller("userCtrl",function(){
+		this.test = "hello user";
+		// this.test = test;
 
-		$scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-		$scope.series = ['Series A', 'Series B'];
-		$scope.data = [
+		this.labels = ["January", "February", "March", "April", "May", "June", "July"];
+		this.series = ['Series A', 'Series B'];
+		this.data = [
 			[randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
 			[randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)]
 		];
-		$scope.onClick = function (points, evt) {
+		this.onClick = function (points, evt) {
 		  console.log(points, evt);
 		};
 		function randBetween(max,min){

@@ -1,22 +1,22 @@
 <div>
-	{{test}}
+	{{admin.test}}
 	<br>
   <form name="addQuestion">
-  	<input type="text" name="libName" placeholder="lib name" ng-model="libName" required>
+  	<input type="text" name="libName" placeholder="lib name" ng-model="admin.libName" required>
     <span class="redText" ng-show="addQuestion.libName.$invalid && addQuestion.libName.$dirty">Required</span>
   	<br>
-  	<input type="text" name="sectName" placeholder="section name" ng-model="sectName" required>
+  	<input type="text" name="sectName" placeholder="section name" ng-model="admin.sectName" required>
     <span class="redText" ng-show="addQuestion.sectName.$invalid && addQuestion.sectName.$dirty">Required</span>
   	<br>
-  	<input type="text" name="question" placeholder="question" ng-model="question" required>
+  	<input type="text" name="question" placeholder="question" ng-model="admin.question" required>
     <span class="redText" ng-show="addQuestion.question.$invalid && addQuestion.question.$dirty">Required</span>
   	<br>
-  	<input type="text" name="answer" placeholder="answer" ng-model="answer" required>
+  	<input type="text" name="answer" placeholder="answer" ng-model="admin.answer" required>
     <span class="redText" ng-show="addQuestion.answer.$invalid && addQuestion.answer.$dirty">Required</span>
   	<br>
-  	<input type="text" name="explain" placeholder="explain" ng-model="explain" required>
+  	<input type="text" name="explain" placeholder="explain" ng-model="admin.explain" required>
     <span class="redText" ng-show="addQuestion.explain.$invalid && addQuestion.explain.$dirty">Required</span>
   	<br>
-  	<input type="button" value="add" ng-click="add()" ng-disabled="addQuestion.$invalid">
+  	<input type="button" value="add" ng-click="admin.add()" ng-disabled="addQuestion.$invalid">
   </form>
 </div>

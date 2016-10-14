@@ -14,8 +14,8 @@
 
 	</head>
 	<body ng-app="study-it">
-		<div id="logout" ng-controller="logOutCtrl">
-			<div ng-click="logOut()">LogOut</div>
+		<div id="logout" ng-controller="logOutCtrl as logOut">
+			<div ng-show="logOut.showLogout" ng-click="logOut.logOut()">LogOut</div>
 		</div>
 		<header>
 			<li><a href="#main">main</a></li>

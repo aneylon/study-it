@@ -1,7 +1,7 @@
 <div>
 	{{admin.test}}
 	<br>
-  <form name="addQuestion">
+  <form name="addQuestion" ng-submit="admin.add()">
   	<input type="text" name="libName" placeholder="lib name" ng-model="admin.libName" required>
     <span class="redText" ng-show="addQuestion.libName.$invalid && addQuestion.libName.$dirty">Required</span>
   	<br>
@@ -17,6 +17,6 @@
   	<input type="text" name="explain" placeholder="explain" ng-model="admin.explain" required>
     <span class="redText" ng-show="addQuestion.explain.$invalid && addQuestion.explain.$dirty">Required</span>
   	<br>
-  	<input type="button" value="add" ng-click="admin.add()" ng-disabled="addQuestion.$invalid">
+  	<input type="submit" value="add" ng-disabled="addQuestion.$invalid">
   </form>
 </div>

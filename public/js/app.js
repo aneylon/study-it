@@ -174,7 +174,7 @@ angular
 			});
 		}
 	})
-	.controller("signupCtrl",function($http, $window){
+	.controller("signupCtrl",function($http, $window, $location){
 		console.log($window.localStorage.getItem('study.it'));
 		this.test = "hello signup";
 		// this.test = test;
@@ -200,6 +200,7 @@ angular
 					this.showSignup = false;
 					// show message area - green (?)
 					this.showMessage = true;
+					$location.path('/');
 				} else {
 					console.log('signup failed');
 					// show sign up error - red (?)

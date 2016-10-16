@@ -1,7 +1,7 @@
 <div>
 	{{signup.test}}
 	<br>
-	<form name="userSignup" ng-show="signup.showSignup">
+	<form name="userSignup" ng-show="signup.showSignup" ng-submit="signup.addUser()">
 		<input type="text" name="username" placeholder="username" ng-model="signup.username" required>
 		<span class="redText" ng-show="userSignup.username.$invalid && userSignup.username.$dirty">Required</span>
 		<br>
@@ -16,7 +16,7 @@
 		<span class="redText" ng-show="userSignup.passwordTwo.$invalid && userSignup.passwordTwo.$dirty">Required</span>
 		<span class="redText" ng-show="passwordTwo !== password && userSignup.passwordTwo.$dirty">must match</span>
 		<br>
-		<input type="button" value="signup" ng-click="signup.addUser()" ng-disabled="userSignup.$invalid">
+		<input type="submit" value="signup" ng-disabled="userSignup.$invalid">
 	</form>
 	<div class="info">
 		<p>

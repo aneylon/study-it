@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>Study It</title>
+		<base href="/">
 		<link rel="icon" href="img/e-book.png">
 		<link href="css/style.css" rel="stylesheet"/>
 		<link href="css/animations.css" rel="stylesheet"/>
@@ -11,6 +12,9 @@
 		<script src="components/Chart.js/Chart.js"></script>
 		<script src="components/angular-chart.js/dist/angular-chart.min.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/app.routes.js"></script>
+		<script src="js/app.ctrls.js"></script>
+		<script src="js/app.auth.js"></script>
 
 	</head>
 	<body ng-app="study-it">
@@ -18,18 +22,18 @@
 			<div ng-show="logOut.showLogout" ng-click="logOut.logOut()">LogOut</div>
 		</div>
 		<header>
-			<li><a href="#main">main</a></li>
-			<li><a href="#login">login</a></li>
-			<li><a href="#signup">signup</a></li>
-			<li><a href="#admin">admin</a></li>
-			<li><a href="#user">user</a></li>
+			<li><a href="/main">main</a></li>
+			<li><a href="/login">login</a></li>
+			<li><a href="/signup">signup</a></li>
+			<li><a href="/admin">admin</a></li>
+			<li><a href="/user">user</a></li>
 		</header>
 
 		<div ng-view></div>
 
 		<footer>
-			<li><a href="#about">about</a></li>
-			<li><a href="#contact">contact</a></li>
+			<li><a href="/about">about</a></li>
+			<li><a href="/contact">contact</a></li>
 		</footer>
 	</body>
 </html>

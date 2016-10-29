@@ -92,33 +92,28 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   vm = this
   vm.test = "contact as";
 })
-.controller("loginCtrl",function($http, $location, $window){
+.controller("loginCtrl",function(Auth, $location){
   vm = this
-  vm.test = "hello login";
-  vm.notValidated = true;
-  vm.validate = function(){ vm.notValidated = !vm.notValidated; };
+  // vm.test = "hello login"
+  vm.message = ''
+  vm.notValidated = true
+  vm.validate = function(){ vm.notValidated = !vm.notValidated }
   vm.login = function(){
-    var creds = {
+    const creds = {
       username: vm.username,
       password: vm.password
     }
-  $http.post('/api/signIn', creds)
-    .then(function(res){
-      if(res.data.success){
-        // if successful add token to window
-        $window.localStorage.setItem('study.it', res.data.token);
-        // if successful change page
-        $location.path('/');
-      } else {
-        // if not show error
-          console.log('login failed');
-        // show div with failed login info
-      }
-    });
+    Auth.login(creds)
+      .then(function(res){
+        if(res.success){
+          $location.path('/')
+        } else {
+          vm.message = res
+        }
+      })
   }
 })
 .controller("signupCtrl",function($http, $window, $location){
-  // console.log('cur token:', $window.localStorage.getItem('study.it'));
   vm = this
   vm.test = "hello signup";
   vm.message = '';

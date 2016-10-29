@@ -27,7 +27,7 @@ angular.module('authServ',[])
     const authIntercept = {}
     // request
     authIntercept.request = function(config){
-      console.log('http req:', config)
+      // console.log('http req:', config)
       return config
     }
     // error response

@@ -1,13 +1,36 @@
 angular.module('authServ',[])
-  .factory('Auth', function(){
+  .factory('Auth', function($http, $q, AuthToken){
     const auth = {}
-    // signup
-    // login
-    // logOut
-    // isloggedin
+
+    auth.signup = function(newUser){
+
+    }
+
+    auth.login = function(user){
+      return $http.post('/api/signIn', user)
+        .then(function(res){
+          if(res.data.success){
+            AuthToken.setToken(res.data.token)
+          }
+          return res.data
+        })
+    }
+
+    auth.logout = function(){
+      AuthToken.setToken()
+    }
+
+    auth.isLoggedIn = function(){
+      if(AuthToken.getToken()){
+        return true
+      } else {
+        return false
+      }
+    }
+
     return auth
   })
-  .factory('AuthToken', function(){
+  .factory('AuthToken', function($window){
     const authToken = {}
     // get token
     authToken.getToken = function(){
@@ -23,11 +46,15 @@ angular.module('authServ',[])
     }
     return authToken
   })
-  .factory('AuthIntercept', function(){
+  .factory('AuthIntercept', function($q, AuthToken){
     const authIntercept = {}
     // request
     authIntercept.request = function(config){
       // console.log('http req:', config)
+      const token = AuthToken.getToken()
+      if(token){
+        config.headers['x-access-token'] = token
+      }
       return config
     }
     // error response

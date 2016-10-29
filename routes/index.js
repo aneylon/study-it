@@ -58,7 +58,7 @@ router.post('/api/signUp', function(req, res){
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
   User.findOne({name: req.body.username}, function(err, searchResult){
-    if(searchResult.length === 0){
+    if(searchResult === null){//searchResult.length === 0 || 
       res.send('User not found');
     } else {
       var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password);

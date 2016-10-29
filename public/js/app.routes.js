@@ -2,9 +2,9 @@ angular.module('routeServ', ['ngRoute'])
 .config(function($routeProvider, $locationProvider){
   $routeProvider
     .when('/',{
-      templateUrl: 'partials/main.html',
-      controller: 'mainCtrl'
-      // controllerAs: 'main'
+      templateUrl: 'partials/home.html',
+      controller: 'homeCtrl',
+      controllerAs: 'home'
     })
     .when('/about',{
       templateUrl: 'partials/about.html',

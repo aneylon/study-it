@@ -1,66 +1,64 @@
 angular.module('ctrlsServ', ['ngAnimate','chart.js'])
 .controller('logOutCtrl', function($window){
-  this.showLogout = false;
-  this.logOut = function(){
+  vm = this
+  vm.showLogout = false;
+  vm.logOut = function(){
     console.log('logging out');
     $window.localStorage.clear();
   };
 })
-.controller('mainCtrl', function($scope, $http, $timeout, $rootScope){
-  $rootScope.$on('$routeChangeStart', function(){
-    console.log('yeah')
-  })
-
+.controller('homeCtrl', function($http, $timeout){
   var test = "hello main";
-  $scope.test = test;
-  $scope.sections = [];
-  $scope.getSections = function(){
+  vm = this
+  vm.test = test;
+  vm.sections = [];
+  vm.getSections = function(){
       var sectionData = '';
       $http.get('/api/libs/all')
       .then(function(res){
         console.log(res.data);
         sectionData = res.data;
-        $scope.sections = sectionData;
+        vm.sections = sectionData;
       });
       return sectionData;
   };
   $timeout(function(){
-    $scope.getSections();
+    vm.getSections();
   });
 
-  $scope.load = function(lib){
+  vm.load = function(lib){
     // hide shown card before loading next lib
-    $scope.hideCard();
+    vm.hideCard();
     $http.get('/api/libs/' + lib)
       .then(function(res){
         console.log('res data is :', res.data);
-        $scope.currentLib = res.data;
-        shuffle($scope.currentLib);
-        $scope.showCurrentCard();
+        vm.currentLib = res.data;
+        shuffle(vm.currentLib);
+        vm.showCurrentCard();
       });
   };
-  $scope.showingCard = false;
-  $scope.toggleShowCard = function(){
-    $scope.showingCard = !$scope.showingCard;
+  vm.showingCard = false;
+  vm.toggleShowCard = function(){
+    vm.showingCard = !vm.showingCard;
   };
-  $scope.hideCard = function(){
-    $scope.showingCard = false;
+  vm.hideCard = function(){
+    vm.showingCard = false;
   };
-  $scope.showCurrentCard = function(){
-    $scope.card = $scope.currentLib[$scope.currentCard];
+  vm.showCurrentCard = function(){
+    vm.card = vm.currentLib[vm.currentCard];
   };
-  $scope.currentCard = 0;
-  $scope.card = '';
-  $scope.currentLib = '';
-  $scope.nextCard = function(){
-    $scope.hideCard();
+  vm.currentCard = 0;
+  vm.card = '';
+  vm.currentLib = '';
+  vm.nextCard = function(){
+    vm.hideCard();
     $timeout(function(){
-      $scope.currentCard++;
-      if($scope.currentCard > $scope.currentLib.length - 1){
-        $scope.currentCard = 0;
-        shuffle($scope.currentLib);
+      vm.currentCard++;
+      if(vm.currentCard > vm.currentLib.length - 1){
+        vm.currentCard = 0;
+        shuffle(vm.currentLib);
       }
-      $scope.showCurrentCard();
+      vm.showCurrentCard();
     },200);
   };
   var shuffle = function(arr){
@@ -81,20 +79,28 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   ];
   // end main controller
 })
+.controller('mainCtrl', function($rootScope){
+  $rootScope.$on('$routeChangeStart', function(){
+    console.log('yeah')
+  })
+})
 .controller("aboutCtrl",function(){
-  this.test = "all about it";
+  vm = this
+  vm.test = "all about it";
 })
 .controller("contactCtrl",function(){
-  this.test = "contact as";
+  vm = this
+  vm.test = "contact as";
 })
 .controller("loginCtrl",function($http, $location, $window){
-  this.test = "hello login";
-  this.notValidated = true;
-  this.validate = function(){ this.notValidated = !this.notValidated; };
-  this.login = function(){
+  vm = this
+  vm.test = "hello login";
+  vm.notValidated = true;
+  vm.validate = function(){ vm.notValidated = !vm.notValidated; };
+  vm.login = function(){
     var creds = {
-      username: this.username,
-      password: this.password
+      username: vm.username,
+      password: vm.password
     }
   $http.post('/api/signIn', creds)
     .then(function(res){
@@ -112,18 +118,18 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   }
 })
 .controller("signupCtrl",function($http, $window, $location){
-  console.log($window.localStorage.getItem('study.it'));
-  this.test = "hello signup";
-  // this.test = test;
-  this.message = '';
-  this.showMesage = false;
-  this.showSignup = true;
-  this.notValidated = true;
-  this.addUser = function(){
+  // console.log('cur token:', $window.localStorage.getItem('study.it'));
+  vm = this
+  vm.test = "hello signup";
+  vm.message = '';
+  vm.showMesage = false;
+  vm.showSignup = true;
+  vm.notValidated = true;
+  vm.addUser = function(){
     var newUser = {
-      username: this.username,
-      email: this.email,
-      password: this.password
+      username: vm.username,
+      email: vm.email,
+      password: vm.password
     }
     console.log("signing up", newUser);
   $http.post('/api/signUp', newUser)
@@ -132,37 +138,38 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       if(res.data.success){
         $window.localStorage.setItem('study.it', res.data.token);
         // show sign up success info
-        this.message = 'Sign up successful';
+        vm.message = 'Sign up successful';
         // hide signup area
-        this.showSignup = false;
+        vm.showSignup = false;
         // show message area - green (?)
-        this.showMessage = true;
+        vm.showMessage = true;
         $location.path('/');
       } else {
         console.log('signup failed');
         // show sign up error - red (?)
-        this.message = 'Sign up failed';
-        this.showMessage = true;
+        vm.message = 'Sign up failed';
+        vm.showMessage = true;
       }
     });
 
-    this.username = '';
-    this.email = '';
-    this.password = '';
-    this.passwordTwo = '';
+    vm.username = '';
+    vm.email = '';
+    vm.password = '';
+    vm.passwordTwo = '';
   };
 })
 .controller("adminCtrl",function($http){
   var test = "hello admin";
-  this.test = test;
-  this.notValidated = true;
-  this.add = function(){
+  vm = this
+  vm.test = test;
+  vm.notValidated = true;
+  vm.add = function(){
     var newCard = {
-      libName: this.libName,
-      sectName: this.sectName,
-      question: this.question,
-      answer: this.answer,
-      explain: this.explain
+      libName: vm.libName,
+      sectName: vm.sectName,
+      question: vm.question,
+      answer: vm.answer,
+      explain: vm.explain
     };
     console.log("adding new stuff", newCard);
 
@@ -172,24 +179,25 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       });
     // notify if added and what
     // or notifiy if existing and not added
-    this.libName = '';
-    this.sectName = '';
-    this.question = '';
-    this.answer = '';
-    this.explain = '';
+    vm.libName = '';
+    vm.sectName = '';
+    vm.question = '';
+    vm.answer = '';
+    vm.explain = '';
   };
 })
 .controller("userCtrl",function(){
-  this.test = "hello user";
-  // this.test = test;
+  vm = this
+  vm.test = "hello user";
+  // vm.test = test;
 
-  this.labels = ["January", "February", "March", "April", "May", "June", "July"];
-  this.series = ['Series A', 'Series B'];
-  this.data = [
+  vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
+  vm.series = ['Series A', 'Series B'];
+  vm.data = [
     [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
     [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)]
   ];
-  this.onClick = function (points, evt) {
+  vm.onClick = function (points, evt) {
     console.log(points, evt);
   };
   function randBetween(max,min){

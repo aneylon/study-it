@@ -1,0 +1,39 @@
+<div>
+	<p>
+		{{home.test}}
+	</p>
+
+	<ul>
+		<li ng-repeat="section in home.sections">
+			{{section.name}}
+			<ul>
+				<li
+					ng-repeat="subSection in section.subSections"
+					ng-click="home.load(section.name + '.' + subSection.name)">
+					{{subSection.name}}
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+	<div>
+		<div ng-click="home.load('one')">test load</div>
+	</div>
+
+	<div id="card">
+		<div id="question" ng-click="home.toggleShowCard()" class="pointer">
+			{{home.card.question}}
+		</div>
+		<div class="slide" ng-show="home.showingCard">
+			<div id="answer">
+				{{home.card.answer}}
+			</div>
+			<div id="explain">
+				{{home.card.explain}}
+			</div>
+		</div>
+	</div>
+
+	<input type="button" value="next" ng-click="home.nextCard()">
+
+</div>

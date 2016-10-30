@@ -11,12 +11,12 @@ var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + proce
 
 router.get('/api/libs/all', function(req, res){
   MongoClient.connect(url,function(err,db){
-    var collection = db.collection('libList');
+    var collection = db.collection('libList')
     collection.find({}).toArray(function(err, docs){
-      res.json(docs);
-    });
-  });
-});
+      res.json(docs)
+    })
+  })
+})
 
 router.get('/api/libs/:libName', function(req, res){
   var libName = req.params.libName;
@@ -98,16 +98,6 @@ router.post('/api/signIn', function(req, res){
 //     return res.status(403).send({ success: false, message:'No token provided'});
 //   }
 // });
-router.get('/api/alldecks',function(req, res){
-  MongoClient.connect(url, function(err, db){
-    if(err)console.log(err)
-    const libList = db.collection('libList')
-    libList.find({}).toArray(function(err, docs){
-      if(err)console.log(err)
-      res.send(docs)
-    })
-  })
-})
 
 router.post('/api/addCard', function(req, res){
   console.log('adding :', req.body);

@@ -41,7 +41,6 @@ router.post('/api/signUp', function(req, res){
       email: req.body.email,
       admin: false
     });
-    // should a promise be used here?
     User.find({name: req.body.username}, function(err, searchResult){
       if(searchResult.length === 0){
         user.save(function(err){
@@ -49,7 +48,7 @@ router.post('/api/signUp', function(req, res){
           res.json({success: true});
         })
       } else {
-        res.json({success: false});
+        res.send('Username already in use')
       }
     });
   });
@@ -58,7 +57,7 @@ router.post('/api/signUp', function(req, res){
 router.post('/api/signIn', function(req, res){
   console.log(req.body);
   User.findOne({name: req.body.username}, function(err, searchResult){
-    if(searchResult === null){//searchResult.length === 0 || 
+    if(searchResult === null){//searchResult.length === 0 ||
       res.send('User not found');
     } else {
       var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password);
@@ -69,7 +68,6 @@ router.post('/api/signIn', function(req, res){
           expiresIn: 1440 // 24 hrs
         });
 
-        // res.send('logged in');
         res.json({
           success: true,
           message: 'Logged in.',
@@ -79,7 +77,6 @@ router.post('/api/signIn', function(req, res){
       } else {
         console.log('no pw match');
         res.send('password does not match');
-        // send jwt if successful
       }
     }
   });

@@ -18,13 +18,13 @@
 
 	</head>
 	<body ng-app="study-it" ng-controller="mainCtrl as main">
-		<div id="logout" ng-controller="logOutCtrl as logOut">
-			<div ng-show="logOut.showLogout" ng-click="logOut.logOut()">LogOut</div>
+		<div id="logout">
+			<div ng-show="main.isLoggedIn" ng-click="main.logout()">LogOut</div>
 		</div>
 		<header>
 			<li><a href="/main">main</a></li>
-			<li><a href="/login">login</a></li>
-			<li><a href="/signup">signup</a></li>
+			<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
+			<li ng-hide="main.isLoggedIn"><a href="/signup">signup</a></li>
 			<li><a href="/admin">admin</a></li>
 			<li><a href="/user">user</a></li>
 		</header>

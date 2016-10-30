@@ -1,12 +1,12 @@
 angular.module('ctrlsServ', ['ngAnimate','chart.js'])
-.controller('logOutCtrl', function($window){
-  vm = this
-  vm.showLogout = false;
-  vm.logOut = function(){
-    console.log('logging out');
-    $window.localStorage.clear();
-  };
-})
+// .controller('logOutCtrl', function($window){
+//   vm = this
+//   vm.showLogout = false;
+//   vm.logOut = function(){
+//     console.log('logging out');
+//     $window.localStorage.clear();
+//   };
+// })
 .controller('homeCtrl', function($http, $timeout){
   var test = "hello main";
   vm = this
@@ -70,22 +70,35 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       col[rand] = temp;
     });
   };
-  var cards = [
-    {question:'one',answer:'two',explain:'three'},
-    {question:'1',answer:'2',explain:'3'},
-    {question:'a',answer:'b',explain:'c'},
-    {question:'ay',answer:'bee',explain:'sea'},
-    {question:'red',answer:'green',explain:'blue'}
-  ];
-  // end main controller
+  // var cards = [
+  //   {question:'one',answer:'two',explain:'three'},
+  //   {question:'1',answer:'2',explain:'3'},
+  //   {question:'a',answer:'b',explain:'c'},
+  //   {question:'ay',answer:'bee',explain:'sea'},
+  //   {question:'red',answer:'green',explain:'blue'}
+  // ];
 })
-.controller('mainCtrl', function($rootScope){
+.controller('mainCtrl', function($rootScope, Auth){
+  const vm = this
+  vm.isLoggedIn = false
   $rootScope.$on('$routeChangeStart', function(){
     console.log('yeah')
+    vm.checkStatus()
   })
+  vm.logout = function(){
+    Auth.logout()
+    vm.checkStatus()
+  }
+  vm.checkStatus = function(){
+    if(Auth.isLoggedIn()){
+      vm.isLoggedIn = true
+    } else {
+      vm.isLoggedIn = false
+    }
+  }
 })
 .controller("aboutCtrl",function(){
-  vm = this
+  const vm = this
   vm.test = "all about it";
 })
 .controller("contactCtrl",function(){
@@ -94,7 +107,6 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
 })
 .controller("loginCtrl",function(Auth, $location){
   vm = this
-  // vm.test = "hello login"
   vm.message = ''
   vm.notValidated = true
   vm.validate = function(){ vm.notValidated = !vm.notValidated }
@@ -113,9 +125,8 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       })
   }
 })
-.controller("signupCtrl",function($http, $window, $location){
+.controller("signupCtrl",function(Auth, $location){
   vm = this
-  vm.test = "hello signup";
   vm.message = '';
   vm.showMesage = false;
   vm.showSignup = true;
@@ -127,30 +138,22 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       password: vm.password
     }
     console.log("signing up", newUser);
-  $http.post('/api/signUp', newUser)
-    .then(function(res){
-      console.log(res.data.success);
-      if(res.data.success){
-        $window.localStorage.setItem('study.it', res.data.token);
-        // show sign up success info
-        vm.message = 'Sign up successful';
-        // hide signup area
-        vm.showSignup = false;
-        // show message area - green (?)
-        vm.showMessage = true;
-        $location.path('/');
-      } else {
-        console.log('signup failed');
-        // show sign up error - red (?)
-        vm.message = 'Sign up failed';
-        vm.showMessage = true;
-      }
-    });
-
-    vm.username = '';
-    vm.email = '';
-    vm.password = '';
-    vm.passwordTwo = '';
+    Auth.signup(newUser)
+      .then(function(res){
+        if(res.success){
+          Auth.login(newUser)
+            .then(function(res){
+              if(res.success){
+                $location.path('/')
+              } else {
+                vm.message = res
+              }
+            })
+        } else {
+          console.log(res)
+          vm.message = res
+        }
+      })
   };
 })
 .controller("adminCtrl",function($http){

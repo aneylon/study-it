@@ -3,7 +3,10 @@ angular.module('authServ',[])
     const auth = {}
 
     auth.signup = function(newUser){
-
+      return $http.post('/api/signUp', newUser)
+        .then(function(res){
+          return res.data
+        })
     }
 
     auth.login = function(user){

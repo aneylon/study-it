@@ -98,6 +98,16 @@ router.post('/api/signIn', function(req, res){
 //     return res.status(403).send({ success: false, message:'No token provided'});
 //   }
 // });
+router.get('/api/alldecks',function(req, res){
+  MongoClient.connect(url, function(err, db){
+    if(err)console.log(err)
+    const libList = db.collection('libList')
+    libList.find({}).toArray(function(err, docs){
+      if(err)console.log(err)
+      res.send(docs)
+    })
+  })
+})
 
 router.post('/api/addCard', function(req, res){
   console.log('adding :', req.body);

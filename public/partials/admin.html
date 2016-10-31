@@ -2,9 +2,19 @@
 	{{admin.test}}
 	<br>
   <form name="addQuestion" ng-submit="admin.add()">
+		<select ng-model="admin.libName" ng-change="admin.libChanged()">
+			<option value=""> - pick one - </option>
+			<option ng-repeat="lib in admin.allLibs">{{ lib.name }}</option>
+		</select>
+		<br>
   	<input type="text" name="libName" placeholder="lib name" ng-model="admin.libName" required>
     <span class="redText" ng-show="addQuestion.libName.$invalid && addQuestion.libName.$dirty">Required</span>
   	<br>
+		<select ng-model="admin.sectName">
+			<option value=""> - pick one - </option>
+			<option ng-repeat="deck in admin.selectedLib">{{ deck.name }}</option>
+		</select>
+		<br>
   	<input type="text" name="sectName" placeholder="section name" ng-model="admin.sectName" required>
     <span class="redText" ng-show="addQuestion.sectName.$invalid && addQuestion.sectName.$dirty">Required</span>
   	<br>
@@ -20,8 +30,7 @@
   	<input type="submit" value="add" ng-disabled="addQuestion.$invalid">
   </form>
 
-	<select name="" id="">
-		<option value="" ng-repeat="lib in admin.allLibs">{{ lib.name }}</option>
-	</select>
+
+
 
 </div>

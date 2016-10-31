@@ -135,7 +135,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
         })
     };
   })
-  .controller("adminCtrl",function(Cards, $timeout){
+  .controller("adminCtrl",function(Cards, $http, $timeout){
     var test = "hello admin";
     vm = this
     vm.test = test;
@@ -162,23 +162,40 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       vm.answer = '';
       vm.explain = '';
     };
+
+    vm.libName = ''
+    vm.sectName = ''
+
     vm.allLibs = [{name:'...loading...'}]
+    vm.libs = ''
+    vm.selectedLib = [{name:'...loading...'}]
+
     vm.getLibs = function(){
       Cards.getAllLibs()
         .then(function(res){
           vm.allLibs = res
+          vm.libs = vm.allLibs.reduce(function(pre, cur){
+            pre[cur.name] = cur.subSections
+            return pre
+          },{})
         })
     }
     vm.getLibs()
+
+    vm.libChanged = function(){
+      vm.selectedLib = vm.libs[vm.libName]
+    }
   })
+
   .controller("userCtrl",function(){
     vm = this
     vm.test = "hello user";
     // vm.test = test;
 
     vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    vm.series = ['Series A', 'Series B'];
+    vm.series = ['Know', 'Not Sure', 'Don\'t know'];
     vm.data = [
+      [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
       [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
       [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)]
     ];

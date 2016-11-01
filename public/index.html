@@ -23,11 +23,11 @@
 			<div ng-show="main.isLoggedIn" ng-click="main.logout()">LogOut</div>
 		</div>
 		<header>
-			<li><a href="/main">main</a></li>
+			<li><a href="/">home</a></li>
 			<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
 			<li ng-hide="main.isLoggedIn"><a href="/signup">signup</a></li>
-			<li><a href="/admin">admin</a></li>
-			<li><a href="/user">user</a></li>
+			<li ng-show="main.isLoggedIn"><a href="/user">user</a></li>
+			<li ng-show="main.isAdmin"><a href="/admin">admin</a></li>
 		</header>
 
 		<div ng-view></div>

@@ -60,6 +60,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   .controller('mainCtrl', function($rootScope, Auth){
     const vm = this
     vm.isLoggedIn = false
+    vm.isAdmin = false
     $rootScope.$on('$routeChangeStart', function(){
       console.log('yeah')
       vm.checkStatus()
@@ -73,6 +74,12 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
         vm.isLoggedIn = true
       } else {
         vm.isLoggedIn = false
+      }
+
+      if(Auth.isAdmin()){
+        vm.isAdmin = true
+      } else {
+        vm.isAdmin = false
       }
     }
   })

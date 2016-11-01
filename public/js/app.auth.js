@@ -31,6 +31,14 @@ angular.module('authServ',[])
       }
     }
 
+    auth.isAdmin = function(){
+      if(AuthToken.getToken()){
+        return true
+      } else {
+        return false
+      }
+    }
+
     return auth
   })
   .factory('AuthToken', function($window){

@@ -71,7 +71,8 @@ router.post('/api/signIn', function(req, res){
         res.json({
           success: true,
           message: 'Logged in.',
-          token: token
+          token: token,
+          admin: searchResult.admin
         });
 
       } else {

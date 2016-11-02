@@ -3,6 +3,7 @@ angular.module('authServ',[])
     const auth = {}
 
     auth.admin = false
+    auth.username = ''
 
     auth.signup = function(newUser){
       return $http.post('/api/signUp', newUser)
@@ -19,6 +20,8 @@ angular.module('authServ',[])
             if(res.data.admin){
               auth.admin = true
             }
+            console.log(res.data)
+            auth.username = res.data.username
           }
           return res.data
         })
@@ -43,6 +46,14 @@ angular.module('authServ',[])
       } else {
         return false
       }
+    }
+
+    auth.saveAnswer = function(user, curLib, curDeck, curCard, answer){
+      console.log('saving', user, curLib, curDeck, curCard, answer)
+      $http.post('/api/saveAnswer', { user, curLib, curDeck, curCard, answer })
+        .then(function(res){
+          console.log('res from server:', res)
+        })
     }
 
     return auth

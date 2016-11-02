@@ -19,15 +19,19 @@
 
 	</head>
 	<body ng-app="study-it" ng-controller="mainCtrl as main">
-		<div id="logout">
-			<div ng-show="main.isLoggedIn" ng-click="main.logout()">LogOut</div>
-		</div>
+
 		<header>
-			<li><a href="/">home</a></li>
-			<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
-			<li ng-hide="main.isLoggedIn"><a href="/signup">signup</a></li>
-			<li ng-show="main.isLoggedIn"><a href="/user">user</a></li>
-			<li ng-show="main.isAdmin"><a href="/admin">admin</a></li>
+			<h1>Study-It</h1>
+			<h3 ng-show="main.isLoggedIn">Hello : {{ main.username }}</h3>
+			<ul>
+				<li><a href="/">home</a></li>
+				<li ng-show="main.isAdmin"><a href="/admin">admin</a></li>
+				<li ng-show="main.isLoggedIn"><a href="/user">user</a></li>
+				<li ng-hide="main.isLoggedIn"><a href="/signup">signup</a></li>
+				<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
+				<li ng-show="main.isLoggedIn" ng-click="main.logout()"><a>logout</a></li>
+			</ul>
+
 		</header>
 
 		<div ng-view></div>
@@ -36,5 +40,6 @@
 			<li><a href="/about">about</a></li>
 			<li><a href="/contact">contact</a></li>
 		</footer>
+
 	</body>
 </html>

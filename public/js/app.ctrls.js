@@ -1,5 +1,5 @@
 angular.module('ctrlsServ', ['ngAnimate','chart.js'])
-  .controller('homeCtrl', function(Cards, $http, $timeout){
+  .controller('homeCtrl', function(Cards, Auth, $http, $timeout){
     var test = "hello main";
     vm = this
     vm.test = test;
@@ -36,8 +36,13 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.currentCard = 0;
     vm.card = '';
     vm.currentLib = '';
-    vm.nextCard = function(){
+    vm.nextCard = function(answer){
       vm.hideCard();
+
+      if(Auth.isLoggedIn()){
+        Auth.saveAnswer('user', 'curLib', 'curDeck', 'curCard', answer)
+      }
+
       $timeout(function(){
         vm.currentCard++;
         if(vm.currentCard > vm.currentLib.length - 1){
@@ -61,8 +66,9 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     const vm = this
     vm.isLoggedIn = false
     vm.isAdmin = false
+    vm.username = ''
+
     $rootScope.$on('$routeChangeStart', function(){
-      console.log('yeah')
       vm.checkStatus()
     })
     vm.logout = function(){
@@ -72,8 +78,10 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.checkStatus = function(){
       if(Auth.isLoggedIn()){
         vm.isLoggedIn = true
+        vm.username = Auth.username
       } else {
         vm.isLoggedIn = false
+        vm.username = ''
       }
 
       if(Auth.isAdmin()){

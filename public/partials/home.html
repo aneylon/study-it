@@ -16,24 +16,22 @@
 		</li>
 	</ul>
 
-	<div>
-		<div ng-click="home.load('one')">test load</div>
-	</div>
-
 	<div id="card">
 		<div id="question" ng-click="home.toggleShowCard()" class="pointer">
-			{{home.card.question}}
+			{{ home.card.question }}
 		</div>
 		<div class="slide" ng-show="home.showingCard">
 			<div id="answer">
-				{{home.card.answer}}
+				{{ home.card.answer }}
 			</div>
 			<div id="explain">
-				{{home.card.explain}}
+				{{ home.card.explain }}
 			</div>
 		</div>
 	</div>
 
-	<input type="button" value="next" ng-click="home.nextCard()">
+	<input type="button" value="know" ng-click="home.nextCard('know')">
+	<input type="button" value="not sure" ng-click="home.nextCard('notSure')">
+	<input type="button" value="don't know" ng-click="home.nextCard('dontKnow')">
 
 </div>

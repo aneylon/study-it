@@ -1,11 +1,58 @@
 * {
-	border: solid green 1px;
 }
 
+body {
+	padding: 0px!important;
+	margin: 0px!important;
+	background-color: linen;
+	color: dimgrey;
+}
+
+header {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	background-color: #444;
+	color: yellowgreen;
+	margin: 0px;
+	padding: 0px;
+}
+
+#main {
+	margin-top: 200px;
+	margin-bottom: 150px;
+}
+
+#list {
+	display: inline-block;
+}
+
+#card {
+	display: inline-block;
+	float: right;
+}
+
+footer {
+	background-color: dimgrey;
+	color: white;
+	position: fixed;
+	bottom:0px;
+	width: 100%;
+}
+
+a {
+	color: white;
+}
+a:hover {
+	color: grey;
+}
+
+/* for card */
 .pointer {
 	cursor: pointer;
 }
 
+/* for validation warning */
 .redText {
   color: red;
 }
@@ -13,13 +60,24 @@
 /*
 grey
 #333027
+dimgrey
+darkgrey
 
 eggshell
 #f7f3da
+antiquewhite
+floralwhite
+linen
 
 lightgreen
 #8ff20c
+chartreuse
+yellowgreen
+greenyellow
 
 darkgreen
 #2ab51d
+green
+forestgreen
+darkgreen
 */

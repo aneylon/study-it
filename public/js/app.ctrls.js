@@ -1,67 +1,74 @@
 angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   .controller('homeCtrl', function(Cards, Auth, $http, $timeout){
-    var test = "hello main";
     vm = this
-    vm.test = test;
-    vm.sections = [{name:'...loading...'}];
+    vm.message = 'home page'
+    vm.deckSelected = false
+    vm.sections = [{name:'...loading...'}]
+
     vm.getSections = function(){
       Cards.getAllLibs()
         .then(function(res){
           vm.sections = res
         })
-    };
-    vm.getSections();
+    }
+    vm.getSections()
 
     vm.load = function(lib){
+      vm.deckSelected = true
       // hide shown card before loading next lib
-      vm.hideCard();
+      vm.hideCard()
       $http.get('/api/libs/' + lib)
         .then(function(res){
-          console.log('res data is :', res.data);
-          vm.currentLib = res.data;
-          shuffle(vm.currentLib);
-          vm.showCurrentCard();
-        });
-    };
-    vm.showingCard = false;
+          console.log('res data is :', res.data)
+          vm.currentLib = res.data
+          shuffle(vm.currentLib)
+          vm.showCurrentCard()
+        })
+    }
+    vm.showingCard = false
     vm.toggleShowCard = function(){
-      vm.showingCard = !vm.showingCard;
-    };
+      vm.showingCard = !vm.showingCard
+    }
     vm.hideCard = function(){
-      vm.showingCard = false;
-    };
+      vm.showingCard = false
+    }
     vm.showCurrentCard = function(){
-      vm.card = vm.currentLib[vm.currentCard];
-    };
-    vm.currentCard = 0;
-    vm.card = '';
-    vm.currentLib = '';
+      vm.card = vm.currentLib[vm.currentCard]
+    }
+    vm.currentCard = 0
+    vm.card = {
+      question: 'Pick a deck to study',
+      explain: 'explanation will show here',
+      answer:'answer will show here'
+    }
+    vm.currentLib = ''
     vm.nextCard = function(answer){
-      vm.hideCard();
+      vm.hideCard()
 
       if(Auth.isLoggedIn()){
         Auth.saveAnswer('user', 'curLib', 'curDeck', 'curCard', answer)
       }
 
       $timeout(function(){
-        vm.currentCard++;
+        vm.currentCard++
         if(vm.currentCard > vm.currentLib.length - 1){
-          vm.currentCard = 0;
-          shuffle(vm.currentLib);
+          vm.currentCard = 0
+          shuffle(vm.currentLib)
         }
-        vm.showCurrentCard();
-      },200);
-    };
+        vm.showCurrentCard()
+      },200)
+    }
     var shuffle = function(arr){
-      console.log('shuffling');
+      console.log('shuffling')
       arr.forEach(function(item,i,col){
-        var rand = Math.floor(Math.random() * arr.length);
-        var temp = item;
-        col[i] = col[rand];
-        col[rand] = temp;
-      });
-    };
+        var rand = Math.floor(Math.random() * arr.length)
+        var temp = item
+        col[i] = col[rand]
+        col[rand] = temp
+      })
+    }
   })
+
   .controller('mainCtrl', function($rootScope, Auth){
     const vm = this
     vm.isLoggedIn = false
@@ -93,7 +100,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   })
   .controller("aboutCtrl",function(){
     const vm = this
-    vm.test = "all about it";
+    vm.test = "all about it"
   })
   .controller("contactCtrl",function(){
     vm = this

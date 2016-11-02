@@ -204,22 +204,23 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
 
   .controller("userCtrl",function(){
     vm = this
-    vm.test = "hello user";
-    // vm.test = test;
+    vm.message = 'User Data';
 
-    vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    vm.series = ['Know', 'Not Sure', 'Don\'t know'];
+    vm.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July']
+    vm.series = ['Know', 'Not Sure', 'Don\'t know']
+    vm.colors = ['#00ff00','#ffff00','#ff0000']
+    var max = 20
     vm.data = [
-      [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
-      [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)],
-      [randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100), randBetween(100)]
-    ];
+      [randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max)],
+      [randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max)],
+      [randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max), randBetween(max)]
+    ]
     vm.onClick = function (points, evt) {
-      console.log(points, evt);
-    };
+      console.log(points, evt)
+    }
     function randBetween(max,min){
       if(min === undefined) {
-        return Math.floor(Math.random() * max);
+        return Math.floor(Math.random() * max)
       } else {
         return Math.floor(Math.random() * (max - min) + min)
       }

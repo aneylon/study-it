@@ -1,9 +1,14 @@
 <div>
 	<p>
-		{{user.test}}
+		{{user.message}}
 	</p>
-	<canvas id="line" class="chart chart-line" chart-data="user.data"
+	<canvas id="bar" class="chart chart-bar" chart-data="user.data"
 	  chart-labels="user.labels" chart-legend="true" chart-series="user.series"
-	  chart-click="user.onClick" >
-	</canvas
+		chart-colours="user.colors" chart-click="user.onClick" >
+	</canvas>
+
+	<!-- <canvas id="line" class="chart chart-line" chart-data="user.data"
+	  chart-labels="user.labels" chart-legend="true" chart-series="user.series"
+		chart-colours="user.colors" chart-click="user.onClick" >
+	</canvas> -->
 </div>

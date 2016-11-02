@@ -88,28 +88,3 @@ angular.module('authServ',[])
     // error response
     return authIntercept
   })
-  .factory('AuthOld', function($window){
-		var authObj = {};
-		var loggedIn = false;
-		authObj.isLoggedIn = function(){
-			return loggedIn;
-		}
-		authObj.signUp = function(){
-			// to do
-			// move signup code here
-		}
-		authObj.logIn = function(){
-			// to do
-			// move login code here
-		}
-		authObj.logOut = function(){
-			$window.localStorage.setItem('study-it','');
-		}
-		authObj.getToken = function(){
-			$window.localStorage.getItem('study-it');
-		}
-		authObj.checkToken = function(){
-			// to do add route to verify token?
-		}
-		return authObj;
-	})

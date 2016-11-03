@@ -2,7 +2,10 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
   .controller('homeCtrl', function(Cards, Auth, $http, $timeout){
     vm = this
     vm.message = 'home page'
+
     vm.deckSelected = false
+    vm.showingCard = false
+
     vm.sections = [{name:'...loading...'}]
 
     vm.getSections = function(){
@@ -14,37 +17,59 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.getSections()
 
     vm.load = function(lib){
+      vm.currentCard = 0
       vm.deckSelected = true
       // hide shown card before loading next lib
       vm.hideCard()
       $http.get('/api/libs/' + lib)
         .then(function(res){
-          console.log('res data is :', res.data)
+          // console.log('res data is :', res.data)
           vm.currentLib = res.data
           shuffle(vm.currentLib)
           vm.showCurrentCard()
         })
+      vm.clearAnswers()
+      console.log(vm.currentLib)
     }
-    vm.showingCard = false
+
     vm.toggleShowCard = function(){
       vm.showingCard = !vm.showingCard
     }
+
     vm.hideCard = function(){
       vm.showingCard = false
     }
+
     vm.showCurrentCard = function(){
       vm.card = vm.currentLib[vm.currentCard]
     }
+
     vm.currentCard = 0
+
     vm.card = {
       question: 'Pick a deck to study',
       explain: 'explanation will show here',
       answer:'answer will show here'
     }
+
+    vm.answers = {
+      know: [],
+      notSure: [],
+      dontKnow: []
+    }
+    vm.clearAnswers = function(){
+      vm.answers['know'] = []
+      vm.answers['notSure'] = []
+      vm.answers['dontKnow'] = []
+    }
+
     vm.currentLib = ''
+
     vm.nextCard = function(answer){
       vm.hideCard()
-
+      // store answer
+      vm.answers[answer].push(vm.card)
+      // save answer if logged in
       if(Auth.isLoggedIn()){
         Auth.saveAnswer('user', 'curLib', 'curDeck', 'curCard', answer)
       }
@@ -53,13 +78,25 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
         vm.currentCard++
         if(vm.currentCard > vm.currentLib.length - 1){
           vm.currentCard = 0
-          shuffle(vm.currentLib)
+          // shuffle each answer section
+          shuffle(vm.answers['know'])
+          shuffle(vm.answers['notSure'])
+          shuffle(vm.answers['dontKnow'])
+          // combine and assign to currentLib
+          vm.currentLib = []
+          vm.currentLib = vm.currentLib.concat(vm.answers['dontKnow'])
+          vm.currentLib = vm.currentLib.concat(vm.answers['notSure'])
+          vm.currentLib = vm.currentLib.concat(vm.answers['know'])
+          // clear answers
+          vm.clearAnswers()
+          // console.log(vm.answers)
+          // shuffle(vm.currentLib)
         }
         vm.showCurrentCard()
       },200)
     }
     var shuffle = function(arr){
-      console.log('shuffling')
+      // console.log('shuffling')
       arr.forEach(function(item,i,col){
         var rand = Math.floor(Math.random() * arr.length)
         var temp = item

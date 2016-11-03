@@ -23,13 +23,34 @@ header {
 	margin-bottom: 150px;
 }
 
-#list {
-	display: inline-block;
+#listWrapper {
+	/*display: inline-block;*/
+	width: 250px;
+	float: left;
+}
+
+#cardWrapper {
+	margin: auto;
+	padding: 15px;
+	max-width: 450px;
+	text-align: center;
 }
 
 #card {
-	display: inline-block;
-	float: right;
+	background-color: #fff;
+	color: #000;
+}
+#question {
+	padding: 15px;
+}
+#answer {
+	border-top: dashed grey 1px;
+	padding: 15px;
+}
+
+#explain {
+	border-top: dashed grey 1px;
+	padding: 15px;
 }
 
 footer {

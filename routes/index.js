@@ -100,6 +100,19 @@ router.use(function(req, res, next){
 
 router.post('/api/saveAnswer', function(req, res){
   console.log('saving', req.body)
+  // connect to database
+  // MongoClient.connect(url,function(err, db){
+  //   if(err)console.log(err)
+// update ( search, update , options )
+// search user to see if entry exists
+  // if exists, then update
+  // if not add
+    // var collection = db.collection(libName);
+    // collection.find({}).toArray(function(err,docs){
+    //   res.json(docs)
+    // })
+  // })
+
   res.send('saved')
 })
 

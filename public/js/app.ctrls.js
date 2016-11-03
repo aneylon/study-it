@@ -17,6 +17,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.getSections()
 
     vm.load = function(lib){
+      console.log(lib) // store this for saving responses
       vm.currentCard = 0
       vm.deckSelected = true
       // hide shown card before loading next lib
@@ -29,7 +30,6 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
           vm.showCurrentCard()
         })
       vm.clearAnswers()
-      console.log(vm.currentLib)
     }
 
     vm.toggleShowCard = function(){

@@ -3,7 +3,7 @@
 		{{home.message}}
 	</p>
 
-	<div id="list">
+	<div id="listWrapper">
 		<ul>
 			<li ng-repeat="section in home.sections">
 				{{section.name}}
@@ -18,21 +18,23 @@
 		</ul>
 	</div>
 
-	<div id="card">
+	<div id="cardWrapper">
 		<div id="buttons" ng-show="home.deckSelected">
 			<input type="button" value="know" ng-click="home.nextCard('know')">
 			<input type="button" value="not sure" ng-click="home.nextCard('notSure')">
 			<input type="button" value="don't know" ng-click="home.nextCard('dontKnow')">
 		</div>
-		<div id="question" ng-click="home.toggleShowCard()" class="pointer">
-			{{ home.card.question }}
-		</div>
-		<div class="slide" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
-			<div id="answer">
-				{{ home.card.answer }}
+		<div id="card">
+			<div id="question" ng-click="home.toggleShowCard()" class="pointer">
+				{{ home.card.question }}
 			</div>
-			<div id="explain">
-				{{ home.card.explain }}
+			<div class="slide" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
+				<div id="answer">
+					{{ home.card.answer }}
+				</div>
+				<div id="explain">
+					{{ home.card.explain }}
+				</div>
 			</div>
 		</div>
 	</div>

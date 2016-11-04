@@ -10,8 +10,7 @@
 	<body ng-app="study-it" ng-controller="mainCtrl as main">
 
 		<header>
-			<h1 class="floatLeft">Study-It</h1>
-			<h3 class="floatRight" ng-show="main.isLoggedIn">Hello : {{ main.username }}</h3>
+			<h1 class="mainTitle floatLeft">Study-It</h1>
 			<ul class="menu floatRight">
 				<li><a href="/">home</a></li>
 				<li ng-show="main.isAdmin"><a href="/admin">admin</a></li>
@@ -20,6 +19,7 @@
 				<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
 				<li ng-show="main.isLoggedIn" ng-click="main.logout()"><a href='/'>logout</a></li>
 			</ul>
+			<h3 class="greeting floatRight" ng-show="main.isLoggedIn">welcome {{ main.username }}</h3>
 
 		</header>
 
@@ -29,8 +29,10 @@
 			<p>
 				all content copy right <a href="http://www.arlen-neylon.com">arlen neylon</a>
 			</p>
-			<li><a href="/about">about</a></li>
-			<li><a href="/contact">contact</a></li>
+			<ul>
+				<li><a href="/about">about</a></li>
+				<li><a href="/contact">contact</a></li>
+			</ul>
 		</footer>
 
 		<script src="components/angular/angular.min.js"></script>

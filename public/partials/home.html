@@ -19,16 +19,16 @@
 	</div>
 
 	<div id="cardWrapper">
-		<div id="buttons" ng-show="home.deckSelected">
-			<input type="button" value="know" ng-click="home.nextCard('know')">
-			<input type="button" value="not sure" ng-click="home.nextCard('notSure')">
-			<input type="button" value="don't know" ng-click="home.nextCard('dontKnow')">
+		<div id="flashCardButtons" ng-show="home.deckSelected">
+			<a class="btn btn-yes" type="button" value="know" ng-click="home.nextCard('know')">know</a>
+			<a class="btn btn-maybe" type="button" value="not sure" ng-click="home.nextCard('notSure')">not sure</a>
+			<a class="btn btn-no" type="button" value="don't know" ng-click="home.nextCard('dontKnow')">don't know</a>
 		</div>
-		<div id="card">
-			<div id="question" ng-click="home.toggleShowCard()" class="pointer">
+		<div id="card" class="pointer">
+			<div id="question" ng-click="home.toggleShowCard()">
 				{{ home.card.question }}
 			</div>
-			<div class="slide" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
+			<div id="cardBack" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
 				<div id="answer">
 					{{ home.card.answer }}
 				</div>

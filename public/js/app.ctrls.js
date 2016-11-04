@@ -122,6 +122,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.checkStatus = function(){
       if(Auth.isLoggedIn()){
         vm.isLoggedIn = true
+        // need to get username from server
         vm.username = Auth.username
       } else {
         vm.isLoggedIn = false

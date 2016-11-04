@@ -5,25 +5,14 @@
 		<base href="/">
 		<link rel="icon" href="img/e-book.png">
 		<link href="css/style.css" rel="stylesheet"/>
-		<link href="css/animations.css" rel="stylesheet"/>
-		<script src="components/angular/angular.min.js"></script>
-		<script src="components/angular-route/angular-route.min.js"></script>
-		<script src="components/angular-animate/angular-animate.min.js"></script>
-		<script src="components/Chart.js/Chart.js"></script>
-		<script src="components/angular-chart.js/dist/angular-chart.min.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/app.routes.js"></script>
-		<script src="js/app.ctrls.js"></script>
-		<script src="js/app.auth.js"></script>
-		<script src="js/app.materials.js"></script>
-
+		<link href="components/animate.css/animate.min.css" rel="stylesheet"/>
 	</head>
 	<body ng-app="study-it" ng-controller="mainCtrl as main">
 
 		<header>
-			<h1>Study-It</h1>
-			<h3 ng-show="main.isLoggedIn">Hello : {{ main.username }}</h3>
-			<ul>
+			<h1 class="floatLeft">Study-It</h1>
+			<h3 class="floatRight" ng-show="main.isLoggedIn">Hello : {{ main.username }}</h3>
+			<ul class="menu floatRight">
 				<li><a href="/">home</a></li>
 				<li ng-show="main.isAdmin"><a href="/admin">admin</a></li>
 				<li ng-show="main.isLoggedIn"><a href="/user">user</a></li>
@@ -44,5 +33,15 @@
 			<li><a href="/contact">contact</a></li>
 		</footer>
 
+		<script src="components/angular/angular.min.js"></script>
+		<script src="components/angular-route/angular-route.min.js"></script>
+		<script src="components/angular-animate/angular-animate.min.js"></script>
+		<script src="components/Chart.js/Chart.js"></script>
+		<script src="components/angular-chart.js/dist/angular-chart.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/app.routes.js"></script>
+		<script src="js/app.ctrls.js"></script>
+		<script src="js/app.auth.js"></script>
+		<script src="js/app.materials.js"></script>
 	</body>
 </html>

@@ -19,9 +19,17 @@ header {
 	padding: 0px;
 }
 
+a {
+	color: white;
+}
+a:hover {
+	color: grey;
+}
+
 #main {
-	margin-top: 100px;
-	margin-bottom: 150px;
+	margin-top: 115px;
+	margin-bottom: 115px;
+	padding: 15px;
 }
 
 #listWrapper {
@@ -61,6 +69,19 @@ header {
 	padding: 15px;
 }
 
+.mainTitle {
+	font-size: 250%;
+	font-weight: bolder;
+	padding: 15px;
+	margin: 15px;
+}
+
+.greeting {
+	clear: right;
+	padding-right: 15px;
+	margin-right: 15px;
+}
+
 .floatLeft {
 	float: left;
 }
@@ -71,6 +92,8 @@ header {
 
 .menu {
 	list-style-type: none;
+	margin: 10px;
+	padding: 10px;
 }
 .menu li {
 	display: inline-block;
@@ -80,6 +103,10 @@ header {
 	padding: 10px;
 	background-color: #999;
 	text-decoration: none;
+}
+.menu li a:hover {
+	background-color: #bbb;
+	color: #555;
 }
 
 .btn {
@@ -95,16 +122,19 @@ header {
 .btn:hover {
 	background-color: #eee;
 }
-.btn-yes {
-	color: green;
+.btn-yes:hover {
+	background-color: green;
+	color: white;
 }
 
-.btn-maybe {
-	color: yellow;
+.btn-maybe:hover {
+	background-color: yellow;
+	color: dimgrey;
 }
 
-.btn-no {
-	color: red;
+.btn-no:hover {
+	background-color: red;
+	color: white;
 }
 
 footer {
@@ -113,13 +143,7 @@ footer {
 	position: fixed;
 	bottom:0px;
 	width: 100%;
-}
-
-a {
-	color: white;
-}
-a:hover {
-	color: grey;
+	padding: 10px;
 }
 
 /* for card */

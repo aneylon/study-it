@@ -1,7 +1,9 @@
 * {
 	font-family: Arial, sans-serif;
 }
-
+html, body {
+	/*height: 100%;*/
+}
 body {
 	padding: 0px!important;
 	margin: 0px!important;
@@ -26,6 +28,21 @@ a:hover {
 	color: grey;
 }
 
+form{
+	width: 300px;
+	margin: auto;
+}
+select {
+	width: 250px;
+	padding: 5px;
+	margin: 5px;
+}
+input {
+	width: 250px;
+	padding: 5px;
+	margin: 5px;
+}
+
 #main {
 	margin-top: 115px;
 	margin-bottom: 115px;
@@ -33,15 +50,18 @@ a:hover {
 }
 
 #listWrapper {
-	width: 250px;
 	float: left;
 }
 
 #cardWrapper {
+	/*float: right;*/
 	margin: auto;
 	padding: 15px;
-	max-width: 450px;
+	max-width: 550px;
 	text-align: center;
+}
+#cardWrapperInner {
+	margin: auto;
 }
 
 #card {
@@ -49,6 +69,7 @@ a:hover {
 	background-color: #fff;
 	color: #000;
 	font-size: xx-large;
+	padding: 25px;
 }
 
 #question {
@@ -103,25 +124,38 @@ a:hover {
 	padding: 10px;
 	background-color: #999;
 	text-decoration: none;
+	box-shadow: 1px 1px 3px black;
 }
 .menu li a:hover {
 	background-color: #bbb;
 	color: #555;
 }
 
+.subjectList li{
+	list-style-type: none;
+}
+.subjectList li div {
+	padding: 5px;
+	margin: 5px;
+	border-bottom: solid dimgrey 1px;
+}
+.subjectList li ul li {
+	padding: 5px;
+	margin: 5px;
+	border-bottom: solid dimgrey 1px;
+}
+
 .btn {
 	cursor: pointer;
 	display: inline-block;
-	background-color: #ccc;
+	background-color: #aaa;
 	margin: 5px;
 	padding: 5px 15px;
 	font-weight: bold;
 	font-size: large;
 	box-shadow: 1px 1px 3px black;
 }
-.btn:hover {
-	background-color: #eee;
-}
+
 .btn-yes:hover {
 	background-color: green;
 	color: white;

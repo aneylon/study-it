@@ -1,17 +1,19 @@
 <div>
-	<p>
-		{{home.message}}
-	</p>
+	<div>
+		Select a subject to study
+	</div>
 
 	<div id="listWrapper">
-		<ul>
+		<ul class="subjectList">
 			<li ng-repeat="section in home.sections">
-				{{section.name}}
+				<div>{{section.name}}</div>
 				<ul>
-					<li
-						ng-repeat="subSection in section.subSections"
+					<li ng-repeat="subSection in section.subSections"
+						class="pointer"
 						ng-click="home.load(section.name + '.' + subSection.name)">
-						{{subSection.name}}
+						<span>
+							{{subSection.name}}
+						</span>
 					</li>
 				</ul>
 			</li>
@@ -19,24 +21,27 @@
 	</div>
 
 	<div id="cardWrapper">
-		<div id="flashCardButtons" ng-show="home.deckSelected">
-			<a class="btn btn-yes" type="button" value="know" ng-click="home.nextCard('know')">know</a>
-			<a class="btn btn-maybe" type="button" value="not sure" ng-click="home.nextCard('notSure')">not sure</a>
-			<a class="btn btn-no" type="button" value="don't know" ng-click="home.nextCard('dontKnow')">don't know</a>
-		</div>
-		<div id="card" class="pointer">
-			<div id="question" ng-click="home.toggleShowCard()">
-				{{ home.card.question }}
+		<div id="cardWrapperInner">
+			<div id="flashCardButtons" ng-show="home.deckSelected">
+				<a class="btn btn-yes" type="button" value="know" ng-click="home.nextCard('know')">know</a>
+				<a class="btn btn-maybe" type="button" value="not sure" ng-click="home.nextCard('notSure')">not sure</a>
+				<a class="btn btn-no" type="button" value="don't know" ng-click="home.nextCard('dontKnow')">don't know</a>
 			</div>
-			<div id="cardBack" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
-				<div id="answer">
-					{{ home.card.answer }}
+			<div id="card" class="pointer">
+				<div id="question" ng-click="home.toggleShowCard()">
+					{{ home.card.question }}
 				</div>
-				<div id="explain">
-					{{ home.card.explain }}
+				<div id="cardBack" ng-show="home.showingCard" ng-click="home.toggleShowCard()">
+					<div id="answer">
+						{{ home.card.answer }}
+					</div>
+					<div id="explain">
+						{{ home.card.explain }}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 </div>

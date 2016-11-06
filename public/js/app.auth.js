@@ -38,11 +38,15 @@ angular.module('authServ',[])
       }
     }
 
-    auth.saveAnswer = function(user, curLib, curDeck, curCard, answer){
-      // console.log('saving', user, curLib, curDeck, curCard, answer)
-      $http.post('/api/saveAnswer', { user, curLib, curDeck, curCard, answer })
+    auth.saveAnswer = function(data){
+      let user = ''
+      auth.userInfo()
         .then(function(res){
-          // console.log('res from server:', res)
+          user = res.username
+          $http.post('/api/saveAnswer', { user, data })
+            .then(function(res){
+              // show message from server?
+            })
         })
     }
 

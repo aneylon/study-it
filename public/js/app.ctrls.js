@@ -16,8 +16,9 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     }
     vm.getSections()
 
+    vm.loadedLib = ''
     vm.load = function(lib){
-      console.log(lib) // store this for saving responses
+      vm.loadedLib = lib  // store this for saving responses
       vm.currentCard = 0
       vm.deckSelected = true
       // hide shown card before loading next lib
@@ -69,9 +70,12 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       vm.hideCard()
       // store answer
       vm.answers[answer].push(vm.card)
-      // save answer if logged in
       if(Auth.isLoggedIn()){
-        Auth.saveAnswer('user', 'curLib', 'curDeck', 'curCard', answer)
+        Auth.saveAnswer({
+          lib: vm.loadedLib,
+          card: vm.currentLib[vm.currentCard],
+          answer: answer
+        })
       }
 
       $timeout(function(){
@@ -87,16 +91,12 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
           vm.currentLib = vm.currentLib.concat(vm.answers['dontKnow'])
           vm.currentLib = vm.currentLib.concat(vm.answers['notSure'])
           vm.currentLib = vm.currentLib.concat(vm.answers['know'])
-          // clear answers
           vm.clearAnswers()
-          // console.log(vm.answers)
-          // shuffle(vm.currentLib)
         }
         vm.showCurrentCard()
       },200)
     }
     var shuffle = function(arr){
-      // console.log('shuffling')
       arr.forEach(function(item,i,col){
         var rand = Math.floor(Math.random() * arr.length)
         var temp = item
@@ -123,7 +123,6 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       if(Auth.isLoggedIn()){
         Auth.userInfo()
           .then(function(res){
-            console.log(res)
             vm.username = res.username
             vm.isAdmin = res.admin
           })

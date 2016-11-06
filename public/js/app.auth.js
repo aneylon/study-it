@@ -2,9 +2,6 @@ angular.module('authServ',[])
   .factory('Auth', function($http, $q, AuthToken){
     const auth = {}
 
-    auth.admin = false
-    auth.username = ''
-
     auth.signup = function(newUser){
       return $http.post('/api/signUp', newUser)
         .then(function(res){
@@ -17,11 +14,6 @@ angular.module('authServ',[])
         .then(function(res){
           if(res.data.success){
             AuthToken.setToken(res.data.token)
-            if(res.data.admin){
-              auth.admin = true
-            }
-            console.log(res.data)
-            auth.username = res.data.username
           }
           return res.data
         })
@@ -29,19 +21,17 @@ angular.module('authServ',[])
 
     auth.logout = function(){
       AuthToken.setToken()
-      auth.admin = false
+    }
+
+    auth.userInfo = function(){
+      return $http.get('/api/loggedIn')
+        .then(function(res){
+          return res.data
+        })
     }
 
     auth.isLoggedIn = function(){
       if(AuthToken.getToken()){
-        return true
-      } else {
-        return false
-      }
-    }
-
-    auth.isAdmin = function(){
-      if(auth.admin === true){
         return true
       } else {
         return false

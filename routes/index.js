@@ -62,7 +62,10 @@ router.post('/api/signIn', function(req, res){
       var pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password)
       if(pwsMatch){
 
-        var token = jwt.sign(searchResult, process.env.SECRET, {
+        var token = jwt.sign({
+          username: searchResult.name,
+          admin: searchResult.admin
+        }, process.env.SECRET, {
           expiresIn: 1440 // 24 hrs
         })
 
@@ -89,13 +92,17 @@ router.use(function(req, res, next){
       if(err){
         return res.json({ success: false, message:'Failed to authenticate token.'})
       } else {
-        req.decoded =decoded
+        req.decoded = decoded
         next()
       }
     });
   } else {
     return res.status(403).send({ success: false, message:'No token provided'})
   }
+})
+
+router.get('/api/loggedIn', function(req, res){
+  res.send(req.decoded)
 })
 
 router.post('/api/saveAnswer', function(req, res){

@@ -14,6 +14,7 @@ var Card = require('./models/card');
 
 var port = process.env.PORT || 8888;
 // mongoose.connect(process.env.DB_HOST);
+// TODO: need to deal with lack of connection
 mongoose.connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASS+process.env.DB_HOST);
 app.set('superSecret', process.env.SECRET);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,7 +24,10 @@ app.use(morgan('dev'));
 
 app.use(express.static('public'));
 
-app.use(routes);
+app.use('/api', routes);
+app.get('*', (req, res)=>{
+	res.redirect('/')
+})
 
 app.listen(port, function(){
 	console.log('listening on : ',port);

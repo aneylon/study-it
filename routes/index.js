@@ -9,7 +9,7 @@ var jwt = require('jsonwebtoken')
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + process.env.DB_HOST
 
-router.get('/api/libs/all', function(req, res){
+router.get('/libs/all', function(req, res){
   MongoClient.connect(url,function(err,db){
     var collection = db.collection('libList')
     collection.find({}).toArray(function(err, docs){
@@ -18,7 +18,7 @@ router.get('/api/libs/all', function(req, res){
   })
 })
 
-router.get('/api/libs/:libName', function(req, res){
+router.get('/libs/:libName', function(req, res){
   var libName = req.params.libName
 
   MongoClient.connect(url,function(err, db){
@@ -32,7 +32,7 @@ router.get('/api/libs/:libName', function(req, res){
   })
 })
 
-router.post('/api/signUp', function(req, res){
+router.post('/signUp', function(req, res){
   console.log(req.body)
   bcrypt.hash(req.body.password, null, null, function(err, hash){
     var user = new User({
@@ -54,7 +54,7 @@ router.post('/api/signUp', function(req, res){
   })
 })
 
-router.post('/api/signIn', function(req, res){
+router.post('/signIn', function(req, res){
   User.findOne({name: req.body.username}, function(err, searchResult){
     if(searchResult === null){//searchResult.length === 0 ||
       res.send('User not found')
@@ -101,29 +101,29 @@ router.use(function(req, res, next){
   }
 })
 
-router.get('/api/loggedIn', function(req, res){
+router.get('/loggedIn', function(req, res){
   res.send(req.decoded)
 })
 
-router.post('/api/saveAnswer', function(req, res){
+router.post('/saveAnswer', function(req, res){
   console.log('saving', req.body)
-  // connect to database
-  // MongoClient.connect(url,function(err, db){
-  //   if(err)console.log(err)
-// update ( search, update , options )
-// search user to see if entry exists
-  // if exists, then update
-  // if not add
-    // var collection = db.collection(libName);
-    // collection.find({}).toArray(function(err,docs){
-    //   res.json(docs)
-    // })
-  // })
-
+  User.findOneAndUpdate(
+    {'name':req.body.user},
+    // {$set: {'admin':false}},
+    {Answers:['test']},
+    { upsert: true, new: true },
+    (err, doc) => {
+      if(err) console.log(err)
+      console.log(doc)
+    })
+  // get user
+  // save answer
+  // use mongoose here + update login / signup to use Mongoose
+  // use $inc to add one to answer
   res.send('saved')
 })
 
-router.post('/api/addCard', function(req, res){
+router.post('/addCard', function(req, res){
   console.log('adding :', req.body)
 
   MongoClient.connect(url,function(err, db){

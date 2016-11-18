@@ -7,6 +7,10 @@ module.exports = function(express){
 
   answerRouter.use(authMiddleware)
 
+  answerRouter.post('/saveAnswer', (req, res) => {
+
+  })
+
   answerRouter.get('/allAnswers', (req, res) => {
     res.send('got all answers')
   })

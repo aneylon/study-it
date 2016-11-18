@@ -13,19 +13,23 @@ const NewUserSchema = new Schema({
 NewUserSchema.pre('save', function(next) {
   let user = this
   if(!user.isModified('password')) return next()
-
-  bcrypt.hash(user.password, null, null, (err, hash) => {
+  bcrypt.genSalt(process.env.SALT, (err, res) => {
     if(err) return next(err)
-    console.log('hashed', hash)
-    user.password = hash
-    console.log(user.password)
-    next()
+
+    bcrypt.hash(user.password, null, null, (err, hash) => {
+      if(err) return next(err)
+      user.password = hash
+      next()
+    })
   })
 })
 
 NewUserSchema.methods.comparePassword = (password) => {
   let user = this
   return bcrypt.compareSync(password, user.password)
+  // bcrypt.compare(password, user.password, (err, res) => {
+  //
+  // })
 }
 
 module.exports = mongoose.model('NewUser', NewUserSchema)

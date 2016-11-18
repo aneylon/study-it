@@ -1,5 +1,6 @@
 // routes for admin users
 const authMiddleware = require('../middleware/auth')
+const NewUser = require('../models/newUser')
 
 module.exports = function(express){
   let adminRouter = express.Router()
@@ -13,7 +14,11 @@ module.exports = function(express){
   })
 
   adminRouter.get('/allUsers', (req, res) => {
-    res.send('got all users')
+    NewUser.find({}, (err, docs) => {
+      if(err) console.log(err)
+      else res.send(docs)
+    })
+    // res.send('got all users')
   })
 
   return adminRouter

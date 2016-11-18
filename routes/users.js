@@ -19,9 +19,9 @@ module.exports = function(express){
         newUser.email = req.body.email
         newUser.password = req.body.password
 
-        newUser.save((err) => {
+        newUser.save((err, user) => {
           if(err) res.send(err)
-          else res.send('saved user')
+          else res.send('saved user' + user)
         })
       } else {
         res.send('user exists')

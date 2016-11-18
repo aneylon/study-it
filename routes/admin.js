@@ -8,6 +8,8 @@ module.exports = function(express){
 
   adminRouter.put('/makeAdmin/:userId', (req, res) => {
     // modify the admin field of a user
+    //
+    res.send('made' + req.params.userId + 'admin')
   })
 
   adminRouter.get('/allUsers', (req, res) => {

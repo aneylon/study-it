@@ -16,7 +16,7 @@ const answerRoutes = require('./routes/answers')(express)
 
 // const scheduledTasks = require('./utils/schedule.js');
 
-const port = process.env.PORT || 8888;
+const port = process.env.PORT || 8080;
 if(process.env.DEV){
 	// connect to dev db
 } else {

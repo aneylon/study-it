@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt-nodejs')
 
 const AnswerSchema = new Schema({
-  questionID: { type: String required: true },
+  questionID: { type: String, required: true },
   userID: { type: String, required: true},
   know: { type: Number, default: 0 },
   dontKnow: { type: Number, default: 0 },

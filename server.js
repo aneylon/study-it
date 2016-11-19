@@ -5,6 +5,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+mongoose.Promise = global.Promise
+let dbServer = process.env.DB_HOST
 // const jwt = require('jsonwebtoken');
 const routes = require('./routes');
 const adminRoutes = require('./routes/admin')(express)
@@ -19,13 +21,14 @@ const answerRoutes = require('./routes/answers')(express)
 const port = process.env.PORT || 8080;
 if(process.env.DEV){
 	// connect to dev db
-} else {
-	mongoose.connect('mongodb://'+process.env.DB_USER+':'+process.env.DB_PASS+process.env.DB_HOST,
-	{ server: {
-		reconnectTries: 30,
-		autoReconnect: true
-	}});
+	dbServer = process.env.DB_TEST
 }
+mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + dbServer,
+{ server: {
+	reconnectTries: 30,
+	autoReconnect: true
+}});
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

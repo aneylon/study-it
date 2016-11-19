@@ -71,21 +71,16 @@ module.exports = function(express){
 
   userRouter.post('/updateUser/:userId', (req, res) => {
 
-    let updateObj = {}
-    if(req.body.name) updateObj.name = req.body.name
-    if(req.body.email) updateObj.email = req.body.email
-    if(req.body.password) updateObj.password = req.body.password
-
-    NewUser.findOneAndUpdate({ _id: new ObjectId(req.params.userId)},
-      { $set: updateObj },
-      { new: true, upsert: true },
-      (err, user) => {
+    NewUser.findById(req.params.userId, function(err, user){
+      if (req.body.name) user.name = req.body.name
+      if (req.body.email) user.email = req.body.email
+      if (req.body.password) user.password = req.body.password
+      user.save((err, user) => {
         if(err) console.log(err)
-        user.save((err, user) => {
-          if(err) console.log(err)
-          else console.log('saving user', user)
-        })
+        else console.log('saved user', user)
       })
+    })
+    
     res.send('updated user')
   })
 

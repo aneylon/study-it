@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt-nodejs')
 
 const NewUserSchema = new Schema({
   name: String,
-  password: {type: String, required: true },
+  password: { type: String, required: true },
   email: { type: String, required: true, index: { unique: true }},
   admin: { type: Boolean, default: false}
 })
 
 NewUserSchema.pre('save', function(next) {
-  console.log('pre save')
   let user = this
-  // if(!user.isModified('password')) return next()
+  if(!user.isModified('password')){
+    return next()
+  }
   bcrypt.genSalt(process.env.SALT, (err, res) => {
     if(err) return next(err)
-    console.log('crypting')
     bcrypt.hash(user.password, null, null, (err, hash) => {
       if(err) return next(err)
       user.password = hash

@@ -5,7 +5,6 @@ const Answer = require('../models/answer')
 module.exports = function(express){
   let answerRouter = express.Router()
 
-
   answerRouter.use(authMiddleware)
 
   answerRouter.post('/saveAnswer', (req, res) => {
@@ -30,7 +29,11 @@ module.exports = function(express){
   })
 
   answerRouter.get('/allAnswers', (req, res) => {
-    res.send('got all answers')
+    // if admin
+    Answer.find({}, (err, answers) => {
+      if(err) console.log(err)
+      res.send(answers)
+    })
   })
 
   return answerRouter

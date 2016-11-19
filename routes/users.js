@@ -3,6 +3,7 @@ const authMiddleware = require('../middleware/auth')
 const bodyParser = require('body-parser')
 const NewUser = require('../models/newUser')
 const jwt = require('jsonwebtoken')
+const ObjectId = require('mongodb').ObjectID
 
 module.exports = function(express){
   let userRouter = express.Router()
@@ -32,28 +33,60 @@ module.exports = function(express){
   })
 
   userRouter.post('/signin', (req, res) => {
+    console.log(req.body.email)
     // find user
-    User.findOne({
+    NewUser.findOne({
       email: req.body.email
-    })
-      .select('name email password admin')
-      .exec((err, user) => {
+    },
+    (err, user) => {
+      if(!user) {
+        res.send('User not found')
+      } else {
+        if(user.comparePassword(req.body.password)) {
+          //make token
+          const token = jwt.sign({
+            name: user.name,
+            admin: user.admin
+          },
+          process.env.SECRET,
+          {
+            expiresIn: 1440
+          })
 
+          res.json({
+            success: true,
+            message: 'Logged In',
+            token: token,
+            admin: user.admin,
+            name: user.name
+          })
+        } else {
+          res.send('password does not match')
+        }
+      }
     })
-    // check password
-    // if good return jwt
-    // else return error message
   })
 
   userRouter.use(authMiddleware)
 
   userRouter.post('/updateUser/:userId', (req, res) => {
 
-  })
+    let updateObj = {}
+    if(req.body.name) updateObj.name = req.body.name
+    if(req.body.email) updateObj.email = req.body.email
+    if(req.body.password) updateObj.password = req.body.password
 
-  // test to verify middleware working
-  userRouter.get('/allusers', (req, res) => {
-    res.send('got all users')
+    NewUser.findOneAndUpdate({ _id: new ObjectId(req.params.userId)},
+      { $set: updateObj },
+      { new: true, upsert: true },
+      (err, user) => {
+        if(err) console.log(err)
+        user.save((err, user) => {
+          if(err) console.log(err)
+          else console.log('saving user', user)
+        })
+      })
+    res.send('updated user')
   })
 
   return userRouter

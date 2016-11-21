@@ -6,8 +6,8 @@
 	<div id="listWrapper">
 		<ul class="subjectList">
 			<li ng-repeat="section in home.sections">
-				<div>{{section.name}}</div>
-				<ul>
+				<div class="displayToggle">{{section.name}}</div>
+				<ul class="hideOnStart">
 					<li ng-repeat="subSection in section.subSections"
 						class="pointer"
 						ng-click="home.load(section.name + '.' + subSection.name)">

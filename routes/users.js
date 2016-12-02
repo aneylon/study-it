@@ -44,7 +44,7 @@ module.exports = function(express){
       } else {
         if(user.comparePassword(req.body.password)) {
           //make token
-          const token = jwt.sign({
+          var token = jwt.sign({
             name: user.name,
             admin: user.admin
           },
@@ -80,7 +80,7 @@ module.exports = function(express){
         else console.log('saved user', user)
       })
     })
-    
+
     res.send('updated user')
   })
 

@@ -1,4 +1,5 @@
 // routes for admin users
+'use strict'
 const authMiddleware = require('../middleware/auth')
 const NewUser = require('../models/newUser')
 const ObjectId = require('mongodb').ObjectID

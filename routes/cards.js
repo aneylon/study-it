@@ -1,4 +1,5 @@
 // routes for interacting with Cards
+'use strict'
 const authMiddleware = require('../middleware/auth')
 const NewCard = require('../models/newCard')
 const ObjectId = require('mongodb').ObjectID

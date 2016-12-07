@@ -1,3 +1,4 @@
+'use strict'
 process.env.DEV = true
 
 let mongoose = require('mongoose')

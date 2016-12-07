@@ -19,7 +19,7 @@
 				<li ng-hide="main.isLoggedIn"><a href="/login">login</a></li>
 				<li ng-show="main.isLoggedIn" ng-click="main.logout()"><a href='/'>logout</a></li>
 			</ul>
-			<h3 class="greeting floatRight" ng-show="main.isLoggedIn">welcome {{ main.username }}</h3>
+			<h3 class="greeting floatRight" ng-show="main.isLoggedIn"><img src="img/userWhite.png" id="userNavIcon"> {{ main.username }}</h3>
 
 		</header>
 

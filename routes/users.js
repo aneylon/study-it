@@ -50,9 +50,11 @@ module.exports = function(express){
   })
 
   userRouter.post('/signin', (req, res) => {
+    console.log(req.body)
     // find user
     NewUser.findOne({
-      email: req.body.email
+      // email: req.body.email
+      name: req.body.name
     },
     (err, user) => {
       if(!user) {
@@ -91,6 +93,10 @@ module.exports = function(express){
   })
 
   userRouter.use(authMiddleware)
+
+  userRouter.get('/userInfo', (req, res) => {
+    res.send(req.decoded)
+  })
 
   userRouter.post('/updateUser/:userId', (req, res) => {
 

@@ -3,14 +3,16 @@ angular.module('authServ',[])
     const auth = {}
 
     auth.signup = function(newUser){
-      return $http.post('/api/signUp', newUser)
+      // return $http.post('/api/signUp', newUser)
+      return $http.post('/user/signup', newUser)
         .then(function(res){
           return res.data
         })
     }
 
     auth.login = function(user){
-      return $http.post('/api/signIn', user)
+      // return $http.post('/api/signIn', user)
+      return $http.post('/user/signin', user)
         .then(function(res){
           if(res.data.success){
             AuthToken.setToken(res.data.token)
@@ -24,7 +26,8 @@ angular.module('authServ',[])
     }
 
     auth.userInfo = function(){
-      return $http.get('/api/loggedIn')
+      // return $http.get('/api/loggedIn')
+      return $http.get('/user/userInfo')
         .then(function(res){
           return res.data
         })

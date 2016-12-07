@@ -25,6 +25,7 @@ describe('User', () => {
   }
 
   let badPw = {
+    name: 'A. Testy McTesterson',
     email: 'test@test.com',
     password: 'notRight'
   }

@@ -18,7 +18,7 @@ const answerRoutes = require('./routes/answers')(express)
 
 const port = process.env.PORT || 8080;
 if(process.env.DEV === true){
-	console.log('connect to test db')
+	// console.log('connect to test db')
 	dbServer = process.env.DB_TEST
 }
 mongoose.connect('mongodb://' + process.env.DB_USER + ':' + process.env.DB_PASS + dbServer,
@@ -45,7 +45,7 @@ app.get('*', (req, res)=>{
 })
 
 app.listen(port, ()=>{
-	console.log('listening on : ',port)
+	console.log('listening on : ', port)
 })
 
 module.exports = app // for testing

@@ -43,6 +43,12 @@ input {
 	margin: 5px;
 }
 
+#userNavIcon {
+	width: 1em;
+	height: 1em;
+	/* vs 16px?*/
+}
+
 #main {
 	margin-top: 115px;
 	margin-bottom: 115px;
@@ -91,7 +97,7 @@ input {
 }
 
 .displayToggle {
-	
+
 }
 
 .hideOnStart {

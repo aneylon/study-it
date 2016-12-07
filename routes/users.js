@@ -50,6 +50,7 @@ module.exports = function(express){
   })
 
   userRouter.post('/signin', (req, res) => {
+    console.log(req.body)
     // find user
     NewUser.findOne({
       // email: req.body.email

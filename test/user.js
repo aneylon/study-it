@@ -12,6 +12,7 @@ let should = chai.should()
 chai.use(chaiHttp)
 
 describe('User', () => {
+  console.log(process.env.DB_TEST)
   before((done) => {
     User.remove({}, (err) => {
       done()

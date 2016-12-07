@@ -17,7 +17,7 @@ const answerRoutes = require('./routes/answers')(express)
 // const scheduledTasks = require('./utils/schedule.js');
 
 const port = process.env.PORT || 8080;
-if(process.env.DEV === false){
+if(process.env.DEV === true){
 	console.log('connect to test db')
 	dbServer = process.env.DB_TEST
 }

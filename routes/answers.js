@@ -1,4 +1,5 @@
 // route for saving user answers
+'use strict'
 const authMiddleware = require('../middleware/auth')
 const Answer = require('../models/answer')
 

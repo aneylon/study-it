@@ -1,3 +1,4 @@
+'use strict'
 require('dotenv').config();
 
 const express = require('express');
@@ -50,3 +51,5 @@ app.get('*', (req, res)=>{
 app.listen(port, ()=>{
 	console.log('listening on : ',port);
 });
+
+module.exports = app

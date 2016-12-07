@@ -1,4 +1,5 @@
 // routes for standard users
+'use strict'
 const authMiddleware = require('../middleware/auth')
 const bodyParser = require('body-parser')
 const NewUser = require('../models/newUser')

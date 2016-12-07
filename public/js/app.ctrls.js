@@ -123,7 +123,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       if(Auth.isLoggedIn()){
         Auth.userInfo()
           .then(function(res){
-            vm.username = res.username
+            vm.username = res.name
             vm.isAdmin = res.admin
           })
         vm.isLoggedIn = true
@@ -149,7 +149,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.validate = function(){ vm.notValidated = !vm.notValidated }
     vm.login = function(){
       const creds = {
-        username: vm.username,
+        name: vm.username,
         password: vm.password
       }
       Auth.login(creds)
@@ -170,7 +170,7 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
     vm.notValidated = true;
     vm.addUser = function(){
       var newUser = {
-        username: vm.username,
+        name: vm.username,
         email: vm.email,
         password: vm.password
       }

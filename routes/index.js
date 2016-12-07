@@ -33,57 +33,57 @@ router.get('/libs/:libName', (req, res)=>{
   })
 })
 
-router.post('/signUp', (req, res)=>{
-  console.log(req.body)
-  bcrypt.hash(req.body.password, null, null, (err, hash)=>{
-    const user = new User({
-      name: req.body.username,
-      password: hash,
-      email: req.body.email,
-      admin: false
-    })
-    User.find({name: req.body.username}, (err, searchResult)=>{
-      if(searchResult.length === 0){
-        user.save((err)=>{
-          if(err) throw err
-          res.json({success: true})
-        })
-      } else {
-        res.send('Username already in use')
-      }
-    })
-  })
-})
+// router.post('/signUp', (req, res)=>{
+//   console.log(req.body)
+//   bcrypt.hash(req.body.password, null, null, (err, hash)=>{
+//     const user = new User({
+//       name: req.body.username,
+//       password: hash,
+//       email: req.body.email,
+//       admin: false
+//     })
+//     User.find({name: req.body.username}, (err, searchResult)=>{
+//       if(searchResult.length === 0){
+//         user.save((err)=>{
+//           if(err) throw err
+//           res.json({success: true})
+//         })
+//       } else {
+//         res.send('Username already in use')
+//       }
+//     })
+//   })
+// })
 
-router.post('/signIn', (req, res)=>{
-  User.findOne({name: req.body.username}, (err, searchResult)=>{
-    if(searchResult === null){//searchResult.length === 0 ||
-      res.send('User not found')
-    } else {
-      const pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password)
-      if(pwsMatch){
-
-        const token = jwt.sign({
-          username: searchResult.name,
-          admin: searchResult.admin
-        }, process.env.SECRET, {
-          expiresIn: 1440 // 24 hrs
-        })
-
-        res.json({
-          success: true,
-          message: 'Logged in.',
-          token: token,
-          admin: searchResult.admin,
-          username: searchResult.name
-        })
-
-      } else {
-        res.send('password does not match')
-      }
-    }
-  })
-})
+// router.post('/signIn', (req, res)=>{
+//   User.findOne({name: req.body.username}, (err, searchResult)=>{
+//     if(searchResult === null){//searchResult.length === 0 ||
+//       res.send('User not found')
+//     } else {
+//       const pwsMatch = bcrypt.compareSync(req.body.password, searchResult.password)
+//       if(pwsMatch){
+//
+//         const token = jwt.sign({
+//           username: searchResult.name,
+//           admin: searchResult.admin
+//         }, process.env.SECRET, {
+//           expiresIn: 1440 // 24 hrs
+//         })
+//
+//         res.json({
+//           success: true,
+//           message: 'Logged in.',
+//           token: token,
+//           admin: searchResult.admin,
+//           username: searchResult.name
+//         })
+//
+//       } else {
+//         res.send('password does not match')
+//       }
+//     }
+//   })
+// })
 
 // middleware to check JWT
 router.use((req, res, next)=>{
@@ -102,9 +102,9 @@ router.use((req, res, next)=>{
   }
 })
 
-router.get('/loggedIn', (req, res)=>{
-  res.send(req.decoded)
-})
+// router.get('/loggedIn', (req, res)=>{
+//   res.send(req.decoded)
+// })
 
 router.post('/saveAnswer', (req, res)=>{
   console.log('saving', req.body)

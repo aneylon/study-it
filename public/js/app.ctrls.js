@@ -221,6 +221,32 @@ angular.module('ctrlsServ', ['ngAnimate','chart.js'])
       vm.explain = '';
     };
 
+    vm.multiAdd = function(){
+      vm.multiLine += '\n'
+      var counter = 0
+      var parsed = []
+      var temp = {}
+      vm.multiLine.split('\n').forEach(item => {
+        if(item === ''){
+          counter = 0
+          parsed.push(temp)
+          temp = {}
+        }
+        else{
+          counter ++
+          if(counter === 1)
+            temp.question = item
+          if(counter === 2)
+            temp.answer = item
+          if(counter === 3)
+            temp.explain = item
+        }
+
+      })
+      console.log(parsed)
+      // send each object to addCard route
+    }
+
     vm.libName = ''
     vm.sectName = ''
 

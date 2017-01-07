@@ -1,36 +1,49 @@
 <div>
 	{{admin.test}}
 	<br>
-  <form name="addQuestion" ng-submit="admin.add()">
-		<select ng-model="admin.libName" ng-change="admin.libChanged()">
-			<option value=""> - pick one - </option>
-			<option ng-repeat="lib in admin.allLibs">{{ lib.name }}</option>
-		</select>
-		<br>
-  	<input type="text" name="libName" placeholder="lib name" ng-model="admin.libName" required>
-    <span class="redText" ng-show="addQuestion.libName.$invalid && addQuestion.libName.$dirty">Required</span>
-  	<br>
-		<select ng-model="admin.sectName">
-			<option value=""> - pick one - </option>
-			<option ng-repeat="deck in admin.selectedLib">{{ deck.name }}</option>
-		</select>
-		<br>
-  	<input type="text" name="sectName" placeholder="section name" ng-model="admin.sectName" required>
-    <span class="redText" ng-show="addQuestion.sectName.$invalid && addQuestion.sectName.$dirty">Required</span>
-  	<br>
-  	<input type="text" name="question" placeholder="question" ng-model="admin.question" required>
-    <span class="redText" ng-show="addQuestion.question.$invalid && addQuestion.question.$dirty">Required</span>
-  	<br>
-  	<input type="text" name="answer" placeholder="answer" ng-model="admin.answer" required>
-    <span class="redText" ng-show="addQuestion.answer.$invalid && addQuestion.answer.$dirty">Required</span>
-  	<br>
-  	<input type="text" name="explain" placeholder="explain" ng-model="admin.explain" required>
-    <span class="redText" ng-show="addQuestion.explain.$invalid && addQuestion.explain.$dirty">Required</span>
-  	<br>
-  	<input type="submit" value="add" ng-disabled="addQuestion.$invalid">
-  </form>
 
+	<div>
+		<h1 class="displayToggle">Add New Card</h1>
+		<div class="hideOnStart">
+			<form name="addQuestion" ng-submit="admin.add()">
+				<select ng-model="admin.libName" ng-change="admin.libChanged()">
+					<option value=""> - pick one - </option>
+					<option ng-repeat="lib in admin.allLibs">{{ lib.name }}</option>
+				</select>
+				<br>
+		  	<input type="text" name="libName" placeholder="lib name" ng-model="admin.libName" required>
+		    <span class="redText" ng-show="addQuestion.libName.$invalid && addQuestion.libName.$dirty">Required</span>
+		  	<br>
+				<select ng-model="admin.sectName">
+					<option value=""> - pick one - </option>
+					<option ng-repeat="deck in admin.selectedLib">{{ deck.name }}</option>
+				</select>
+				<br>
+		  	<input type="text" name="sectName" placeholder="section name" ng-model="admin.sectName" required>
+		    <span class="redText" ng-show="addQuestion.sectName.$invalid && addQuestion.sectName.$dirty">Required</span>
+		  	<br>
+		  	<input type="text" name="question" placeholder="question" ng-model="admin.question" required>
+		    <span class="redText" ng-show="addQuestion.question.$invalid && addQuestion.question.$dirty">Required</span>
+		  	<br>
+		  	<input type="text" name="answer" placeholder="answer" ng-model="admin.answer" required>
+		    <span class="redText" ng-show="addQuestion.answer.$invalid && addQuestion.answer.$dirty">Required</span>
+		  	<br>
+		  	<input type="text" name="explain" placeholder="explain" ng-model="admin.explain" required>
+		    <span class="redText" ng-show="addQuestion.explain.$invalid && addQuestion.explain.$dirty">Required</span>
+		  	<br>
+		  	<input type="submit" value="add" ng-disabled="addQuestion.$invalid">
+		  </form>
+		</div>
+	</div>
 
-
+	<div>
+		<h1 class="displayToggle">Add Multiple Cards</h1>
+		<div class="hideOnStart">
+			<form ng-submit="admin.multiAdd()">
+				<textarea ng-model="admin.multiLine"></textarea>
+				<input type="submit">
+			</form>
+		</div>
+	</div>
 
 </div>
